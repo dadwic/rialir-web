@@ -1,21 +1,27 @@
 {
-  "name": "material-ui-vite",
-  "version": "5.0.0",
+  "name": "rialir",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
+    "@mui/icons-material": "^5.14.9",
     "@mui/material": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "stylis": "^4.3.0",
+    "stylis-plugin-rtl": "^2.1.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "latest",
+    "husky": "^8.0.0",
+    "prettier": "3.0.3",
     "vite": "latest"
   }
 }

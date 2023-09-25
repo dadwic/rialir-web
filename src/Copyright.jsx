@@ -2,14 +2,19 @@ import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 
-export default function Copyright() {
+export default function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      کلیه حقوق این وب‌سایت محفوظ و متعلق به{' '}
+      <Link color="inherit" href="https://www.rialir.com/" target="_blank">
+        ریالیر
       </Link>{' '}
-      {new Date().getFullYear()}.
+      می‌باشد.
     </Typography>
   );
 }
