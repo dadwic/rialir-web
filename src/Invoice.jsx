@@ -12,9 +12,9 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import LiraIcon from '@mui/icons-material/CurrencyLira';
 import { AppDispatchContext } from './context';
 import { numFormat, persianNumber } from './utils';
+import Logo from './Logo';
 import URL from './URL';
 
 moment.loadPersian({ usePersianDigits: true });
@@ -110,8 +110,8 @@ export default function Invoice({ store }) {
             <Typography gutterBottom>{persianNumber(store.mobile)}</Typography>
             <Typography>{store.address}</Typography>
           </Grid>
-          <Divider orientation="vertical" flexItem>
-            <LiraIcon />
+          <Divider flexItem orientation="vertical">
+            <Logo />
           </Divider>
           <Grid item xs sx={{ pb: 2, pl: 3 }}>
             <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>

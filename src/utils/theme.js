@@ -15,6 +15,15 @@ const theme = createTheme({
       main: red.A400,
     },
   },
+  components: {
+    MuiDivider: {
+      styleOverrides: {
+        wrapperVertical: {
+          display: 'flex',
+        },
+      },
+    },
+  },
 });
 
 export default theme;
