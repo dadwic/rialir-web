@@ -11,7 +11,7 @@ export default defineConfig({
       manifest: {
         name: 'rialir',
         short_name: 'rialir',
-        theme_color: '#CE0E2D',
+        theme_color: '#ffffff',
         background_color: '#ffffff',
         icons: [
           {
