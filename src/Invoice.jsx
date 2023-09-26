@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
+import moment from 'moment-jalaali';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Table from '@mui/material/Table';
@@ -10,8 +12,11 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import LiraIcon from '@mui/icons-material/CurrencyLira';
 import { AppDispatchContext } from './context';
 import { numFormat, persianNumber } from './utils';
+
+moment.loadPersian({ usePersianDigits: true });
 
 export default function Invoice({ store }) {
   const dispatch = useContext(AppDispatchContext);
@@ -31,8 +36,21 @@ export default function Invoice({ store }) {
         <Box display="flex" justifyContent="center" onClick={handleClick}>
           <img src="/logo-2x.png" height={96} />
         </Box>
-        <Typography variant="h6" fontWeight={700} sx={{ mt: 2 }}>
+        <Typography
+          variant="h6"
+          textAlign="center"
+          fontWeight={700}
+          sx={{ mt: 2 }}
+          gutterBottom
+        >
           صورتحساب هزینه باربری
+        </Typography>
+        <Typography
+          variant="subtitle2"
+          textAlign="center"
+          color="text.secondary"
+        >
+          {moment().format('dddd jD jMMMM jYYYY - H:mm')}
         </Typography>
         <TableContainer component={Paper} variant="outlined" sx={{ mt: 2 }}>
           <Table size="small">
@@ -43,13 +61,15 @@ export default function Invoice({ store }) {
             )}
             <TableHead>
               <TableRow>
+                <TableCell width={40}>ردیف</TableCell>
                 <TableCell>نام محصول</TableCell>
                 <TableCell align="right">وزن محصول</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {store.products.map((product) => (
+              {store.products.map((product, index) => (
                 <TableRow key={product.name}>
+                  <TableCell>{persianNumber(index + 1)}</TableCell>
                   <TableCell component="th" scope="row">
                     {product.name}
                   </TableCell>
@@ -59,7 +79,7 @@ export default function Invoice({ store }) {
                 </TableRow>
               ))}
               <TableRow>
-                <TableCell colSpan={2}>
+                <TableCell colSpan={3}>
                   <Typography component="span" fontWeight={700}>
                     مجموع:&nbsp;
                   </Typography>
@@ -71,10 +91,10 @@ export default function Invoice({ store }) {
             </TableBody>
           </Table>
         </TableContainer>
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
+        <Grid container>
+          <Grid item xs sx={{ pb: 2 }}>
             <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-              مشخصات مشتری
+              مشخصات خریدار
             </Typography>
             <Typography gutterBottom>
               {store.firstName} {store.lastName}
@@ -82,15 +102,33 @@ export default function Invoice({ store }) {
             <Typography gutterBottom>{persianNumber(store.mobile)}</Typography>
             <Typography gutterBottom>{store.address}</Typography>
           </Grid>
-          <Grid item xs={6}>
+          <Divider orientation="vertical" flexItem>
+            <LiraIcon />
+          </Divider>
+          <Grid item xs sx={{ pb: 2, pl: 3 }}>
             <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
               نحوه پرداخت
             </Typography>
-            <Typography gutterBottom>شماره کارت</Typography>
-            <Typography gutterBottom>6219-8619-0609-8149</Typography>
+            <Typography gutterBottom>شماره کارت بانک سامان</Typography>
+            <Typography fontWeight={700} gutterBottom>
+              6219&nbsp;8619&nbsp;0609&nbsp;8149
+            </Typography>
             <Typography gutterBottom>بنام مهرداد مهرعلیان</Typography>
           </Grid>
         </Grid>
+        <Divider sx={{ mb: 2 }} />
+        <Typography fontWeight={700} gutterBottom>
+          توضیحات:
+        </Typography>
+        <list>
+          <Typography component="li" fontWeight={700} gutterBottom>
+            حتما در توضیحات تراکنش ذکر شود: بابت پرداخت قرض و تادیه دیون
+          </Typography>
+          <Typography component="li" fontWeight={700}>
+            مشتری گرامی بعد از پرداخت، تصویر فیش واریزی را برای پشتیبانی ریالیر
+            ارسال کنید.
+          </Typography>
+        </list>
       </Box>
     </Container>
   );
