@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import * as yup from 'yup';
-import { get, useFieldArray, useForm } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -23,6 +23,7 @@ const schema = yup
     firstName: yup.string().required('نام الزامی است.'),
     lastName: yup.string().required('نام خانوادگی الزامی است.'),
     mobile: yup.string().required('شماره موبایل الزامی است.'),
+    address: yup.string().required('آدرس الزامی است.'),
     products: yup.array().of(
       yup.object().shape({
         name: yup.string().required('نام الزامی است.'),
@@ -32,21 +33,17 @@ const schema = yup
   })
   .required();
 
-export default function Form() {
+export default function Form({ store }) {
   const dispatch = useContext(AppDispatchContext);
-  const { control, getValues, handleSubmit } = useForm({
+  const { control, handleSubmit, watch } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: {
-      tipax: true,
-      products: [{ name: '', weight: '' }],
-    },
+    defaultValues: store,
   });
+  const { tipax } = watch();
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'products',
   });
-
-  const { tipax } = getValues();
 
   const onSubmit = (data) => {
     dispatch({ type: 'set_data', data });
@@ -56,7 +53,7 @@ export default function Form() {
     <Container component="main" maxWidth="xs">
       <Box
         sx={{
-          marginTop: 8,
+          marginTop: 4,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -75,7 +72,7 @@ export default function Form() {
           noValidate
         >
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={6}>
               <Input
                 fullWidth
                 autoFocus
@@ -85,7 +82,7 @@ export default function Form() {
                 label="نام"
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={6}>
               <Input
                 fullWidth
                 control={control}
@@ -94,19 +91,29 @@ export default function Form() {
                 label="نام خانوادگی"
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <Input
                 fullWidth
                 control={control}
                 type="tel"
                 id="mobile"
                 name="mobile"
+                inputProps={{ maxLength: 11 }}
                 label="شماره موبایل"
               />
             </Grid>
+            <Grid item xs={6}>
+              <Input
+                fullWidth
+                control={control}
+                id="address"
+                name="address"
+                label="آدرس"
+              />
+            </Grid>
             {fields.map((field, index) => (
-              <>
-                <Grid item xs={12}>
+              <React.Fragment key={index}>
+                <Grid item xs={6}>
                   <Input
                     fullWidth
                     key={field.id}
@@ -116,7 +123,7 @@ export default function Form() {
                     label="نام محصول"
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={6}>
                   <Input
                     fullWidth
                     key={field.id}
@@ -143,27 +150,27 @@ export default function Form() {
                     <CloseIcon />
                   </IconButton>
                 </Grid>
-              </>
+              </React.Fragment>
             ))}
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <Checkbox
                 id="tipax"
                 name="tipax"
                 color="primary"
                 control={control}
-                checked={tipax}
+                defaultChecked={tipax}
                 label="تیپاکس"
               />
             </Grid>
             {!tipax && (
-              <Grid item xs={12}>
+              <Grid item xs={6}>
                 <Input
                   fullWidth
                   control={control}
                   type="tel"
                   id="cargo"
                   name="cargo"
-                  label="هزینه باربری داخلی"
+                  label="هزینه پیک (تومان)"
                 />
               </Grid>
             )}

@@ -5,11 +5,12 @@ export default function AppProvider({ children }) {
   const [store, dispatch] = useReducer(appReducer, {
     edit: true,
     tipax: true,
+    cargo: '0',
     firstName: '',
     lastName: '',
     mobile: '',
     address: '',
-    products: [],
+    products: [{ name: '', weight: '' }],
   });
 
   return (

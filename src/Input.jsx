@@ -1,4 +1,5 @@
 import React from 'react';
+import get from 'lodash.get';
 import { Controller } from 'react-hook-form';
 import TextField from '@mui/material/TextField';
 
@@ -10,8 +11,8 @@ export default function Input({ control, name, ...props }) {
       render={({ field, formState: { errors } }) => (
         <TextField
           {...field}
-          helperText={errors[name]?.message}
-          error={Boolean(errors[name]?.message)}
+          helperText={get(errors, `${name}.message`)}
+          error={Boolean(get(errors, `${name}.message`))}
           {...props}
         />
       )}
