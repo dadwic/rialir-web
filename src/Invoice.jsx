@@ -107,7 +107,7 @@ export default function Invoice({ store }) {
           </Divider>
           <Grid item xs sx={{ pb: 2, pl: 3 }}>
             <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-              نحوه پرداخت
+              روش پرداخت
             </Typography>
             <Typography gutterBottom>شماره کارت بانک سامان</Typography>
             <Typography fontWeight={700} gutterBottom>
