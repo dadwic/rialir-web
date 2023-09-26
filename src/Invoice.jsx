@@ -113,7 +113,7 @@ export default function Invoice({ store }) {
           <Divider flexItem orientation="vertical">
             <Logo />
           </Divider>
-          <Grid item xs sx={{ pb: 2, pl: 3 }}>
+          <Grid item xs sx={{ pb: 2, pl: 2.5 }}>
             <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
               روش پرداخت
             </Typography>
