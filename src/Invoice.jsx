@@ -100,7 +100,7 @@ export default function Invoice({ store }) {
               {store.firstName} {store.lastName}
             </Typography>
             <Typography gutterBottom>{persianNumber(store.mobile)}</Typography>
-            <Typography gutterBottom>{store.address}</Typography>
+            <Typography>{store.address}</Typography>
           </Grid>
           <Divider orientation="vertical" flexItem>
             <LiraIcon />
@@ -113,7 +113,7 @@ export default function Invoice({ store }) {
             <Typography fontWeight={700} gutterBottom>
               6219&nbsp;8619&nbsp;0609&nbsp;8149
             </Typography>
-            <Typography gutterBottom>بنام مهرداد مهرعلیان</Typography>
+            <Typography>بنام مهرداد مهرعلیان</Typography>
           </Grid>
         </Grid>
         <Divider sx={{ mb: 2 }} />
