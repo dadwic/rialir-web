@@ -33,7 +33,7 @@ export default function Invoice({ store }) {
 
   return (
     <Container component="main" maxWidth="xs">
-      <Box mt={4}>
+      <Box mt={2}>
         <Box
           display="flex"
           flexDirection="column"
@@ -65,7 +65,10 @@ export default function Invoice({ store }) {
             {store.tipax ? (
               <caption>هزینه تیپاکس پس‌کرایه بر عهده مشتری می باشد.</caption>
             ) : (
-              <caption>هزینه پیک: {numFormat(store.cargo)} تومان</caption>
+              <caption>
+                مجموع صورتحساب شامل {numFormat(store.cargo)} تومان هزینه پیک می
+                باشد.
+              </caption>
             )}
             <TableHead>
               <TableRow>
