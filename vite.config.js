@@ -11,8 +11,8 @@ export default defineConfig({
       manifest: {
         name: 'rialir',
         short_name: 'rialir',
-        description: 'Calculate Shipping App',
-        theme_color: '#ffffff',
+        theme_color: '#CE0E2D',
+        background_color: '#ffffff',
         icons: [
           {
             src: 'pwa-512x512.png',
