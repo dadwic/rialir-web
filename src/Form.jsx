@@ -132,23 +132,29 @@ export default function Form({ store }) {
                     name={`products.${index}.weight`}
                     label="وزن محصول (گرم)"
                     type="tel"
+                    InputProps={{
+                      endAdornment: (
+                        <IconButton
+                          color="error"
+                          disabled={index === 0}
+                          onClick={() => remove(index)}
+                        >
+                          <CloseIcon />
+                        </IconButton>
+                      ),
+                    }}
                   />
-                  <Button
-                    startIcon={<AddIcon />}
-                    variant="outlined"
-                    sx={{ mt: 1 }}
-                    onClick={() => append({ name: '', weight: '' })}
-                  >
-                    محصول جدید
-                  </Button>
-                  <IconButton
-                    color="error"
-                    sx={{ mt: 1, ml: 1 }}
-                    disabled={index === 0}
-                    onClick={() => remove(index)}
-                  >
-                    <CloseIcon />
-                  </IconButton>
+                  {index === 0 && (
+                    <Button
+                      fullWidth
+                      startIcon={<AddIcon />}
+                      variant="outlined"
+                      sx={{ mt: 2 }}
+                      onClick={() => append({ name: '', weight: '' })}
+                    >
+                      محصول جدید
+                    </Button>
+                  )}
                 </Grid>
               </React.Fragment>
             ))}
