@@ -1,12 +1,10 @@
 import React, { useContext } from 'react';
 import * as yup from 'yup';
-import { useFieldArray, useForm } from 'react-hook-form';
+import { get, useFieldArray, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import IconButton from '@mui/material/IconButton';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -17,6 +15,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { AppDispatchContext } from './context';
 import Copyright from './Copyright';
+import Checkbox from './Checkbox';
 import Input from './Input';
 
 const schema = yup
@@ -35,11 +34,11 @@ const schema = yup
 
 export default function Form() {
   const dispatch = useContext(AppDispatchContext);
-  const { control, handleSubmit } = useForm({
+  const { control, getValues, handleSubmit } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      firstName: 'Mehrdad',
-      products: [{ name: 'test', weight: '1000' }],
+      tipax: true,
+      products: [{ name: '', weight: '' }],
     },
   });
   const { fields, append, remove } = useFieldArray({
@@ -47,7 +46,11 @@ export default function Form() {
     name: 'products',
   });
 
-  const onSubmit = (data) => dispatch({ type: 'set_data', data });
+  const { tipax } = getValues();
+
+  const onSubmit = (data) => {
+    dispatch({ type: 'set_data', data });
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -95,6 +98,7 @@ export default function Form() {
               <Input
                 fullWidth
                 control={control}
+                type="tel"
                 id="mobile"
                 name="mobile"
                 label="شماره موبایل"
@@ -102,7 +106,7 @@ export default function Form() {
             </Grid>
             {fields.map((field, index) => (
               <>
-                <Grid item xs={6}>
+                <Grid item xs={12}>
                   <Input
                     fullWidth
                     key={field.id}
@@ -112,7 +116,7 @@ export default function Form() {
                     label="نام محصول"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12}>
                   <Input
                     fullWidth
                     key={field.id}
@@ -120,7 +124,7 @@ export default function Form() {
                     control={control}
                     name={`products.${index}.weight`}
                     label="وزن محصول (گرم)"
-                    type="number"
+                    type="tel"
                   />
                   <Button
                     startIcon={<AddIcon />}
@@ -142,11 +146,27 @@ export default function Form() {
               </>
             ))}
             <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
+              <Checkbox
+                id="tipax"
+                name="tipax"
+                color="primary"
+                control={control}
+                checked={tipax}
                 label="تیپاکس"
               />
             </Grid>
+            {!tipax && (
+              <Grid item xs={12}>
+                <Input
+                  fullWidth
+                  control={control}
+                  type="tel"
+                  id="cargo"
+                  name="cargo"
+                  label="هزینه باربری داخلی"
+                />
+              </Grid>
+            )}
           </Grid>
           <Button
             fullWidth

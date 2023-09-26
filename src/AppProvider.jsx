@@ -3,11 +3,13 @@ import { AppContext, AppDispatchContext } from './context';
 
 export default function AppProvider({ children }) {
   const [store, dispatch] = useReducer(appReducer, {
+    edit: true,
+    tipax: true,
     firstName: '',
     lastName: '',
     mobile: '',
+    address: '',
     products: [],
-    tipax: false,
   });
 
   return (
@@ -22,7 +24,10 @@ export default function AppProvider({ children }) {
 function appReducer(data, action) {
   switch (action.type) {
     case 'set_data': {
-      return { ...data, ...action.data };
+      return { ...action.data, edit: false };
+    }
+    case 'edit_mode': {
+      return { ...data, edit: true };
     }
     default: {
       throw Error('Unknown action: ' + action.type);
