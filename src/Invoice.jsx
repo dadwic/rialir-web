@@ -15,6 +15,7 @@ import TableRow from '@mui/material/TableRow';
 import LiraIcon from '@mui/icons-material/CurrencyLira';
 import { AppDispatchContext } from './context';
 import { numFormat, persianNumber } from './utils';
+import URL from './URL';
 
 moment.loadPersian({ usePersianDigits: true });
 
@@ -33,8 +34,15 @@ export default function Invoice({ store }) {
   return (
     <Container component="main" maxWidth="xs">
       <Box mt={4}>
-        <Box display="flex" justifyContent="center" onClick={handleClick}>
-          <img src="/logo-2x.png" height={96} />
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          onClick={handleClick}
+        >
+          <img src="/logo-2x.png" width={216} />
+          <URL />
         </Box>
         <Typography
           variant="h6"
@@ -120,7 +128,7 @@ export default function Invoice({ store }) {
         <Typography fontWeight={700} gutterBottom>
           توضیحات:
         </Typography>
-        <list>
+        <ul>
           <Typography component="li" fontWeight={700} gutterBottom>
             حتما در توضیحات تراکنش ذکر شود: بابت پرداخت قرض و تادیه دیون
           </Typography>
@@ -128,7 +136,7 @@ export default function Invoice({ store }) {
             مشتری گرامی بعد از پرداخت، تصویر فیش واریزی را برای پشتیبانی ریالیر
             ارسال کنید.
           </Typography>
-        </list>
+        </ul>
       </Box>
     </Container>
   );
