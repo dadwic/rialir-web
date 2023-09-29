@@ -2,4 +2,4 @@
 
 ## Calculate Shipping App
 
-[Click here](https://rialir.vercel.app/):
+[https://rialir.vercel.app](https://rialir.vercel.app/)
