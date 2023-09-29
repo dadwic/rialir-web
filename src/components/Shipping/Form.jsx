@@ -21,10 +21,12 @@ import Invoice from './Invoice';
 
 const schema = yup
   .object({
-    firstName: yup.string().required('نام الزامی است.'),
-    lastName: yup.string().required('نام خانوادگی الزامی است.'),
-    mobile: yup.string().required('شماره موبایل الزامی است.'),
-    address: yup.string().required('آدرس الزامی است.'),
+    customer: yup.object().shape({
+      firstName: yup.string().required('نام الزامی است.'),
+      lastName: yup.string().required('نام خانوادگی الزامی است.'),
+      mobile: yup.string().required('شماره موبایل الزامی است.'),
+      address: yup.string().required('آدرس الزامی است.'),
+    }),
     products: yup.array().of(
       yup.object().shape({
         name: yup.string().required('نام الزامی است.'),
@@ -35,12 +37,12 @@ const schema = yup
   .required();
 
 export default function ShippingForm() {
-  const store = useContext(AppContext);
   const dispatch = useContext(AppDispatchContext);
+  const { customer, shipping } = useContext(AppContext);
   const [editMode, setEditMode] = useState(true);
   const { control, handleSubmit, watch } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: store.shipping,
+    defaultValues: { customer, ...shipping },
   });
   const { tipax } = watch();
   const { fields, append, remove } = useFieldArray({
@@ -48,8 +50,8 @@ export default function ShippingForm() {
     name: 'products',
   });
 
-  const onSubmit = (data) => {
-    dispatch({ type: 'set_shipping', data });
+  const onSubmit = ({ customer, ...data }) => {
+    dispatch({ type: 'set_shipping', customer, data });
     setEditMode(false);
   };
 
@@ -83,7 +85,7 @@ export default function ShippingForm() {
                 fullWidth
                 autoFocus
                 control={control}
-                name="firstName"
+                name="customer.firstName"
                 id="firstName"
                 label="نام"
               />
@@ -92,8 +94,8 @@ export default function ShippingForm() {
               <Input
                 fullWidth
                 control={control}
+                name="customer.lastName"
                 id="lastName"
-                name="lastName"
                 label="نام خانوادگی"
               />
             </Grid>
@@ -103,7 +105,7 @@ export default function ShippingForm() {
                 control={control}
                 type="tel"
                 id="mobile"
-                name="mobile"
+                name="customer.mobile"
                 inputProps={{ maxLength: 11 }}
                 label="شماره موبایل"
               />
@@ -112,8 +114,8 @@ export default function ShippingForm() {
               <Input
                 fullWidth
                 control={control}
+                name="customer.address"
                 id="address"
-                name="address"
                 label="آدرس"
               />
             </Grid>

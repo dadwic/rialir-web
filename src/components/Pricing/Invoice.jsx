@@ -20,8 +20,9 @@ import URL from '../../URL';
 moment.loadPersian({ usePersianDigits: true });
 
 export default function PricingInvoice({ onEdit }) {
-  const { pricing } = useContext(AppContext);
-  const invoiceTotal = 1000;
+  const { customer, pricing } = useContext(AppContext);
+  const rate = parseInt(pricing.try) + parseInt(pricing.fee);
+  const invoiceTotal = rate * parseFloat(pricing.subtotal);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -43,40 +44,51 @@ export default function PricingInvoice({ onEdit }) {
           sx={{ mt: 2 }}
           gutterBottom
         >
-          صورتحساب هزینه باربری
+          پیش فاکتور
         </Typography>
         <Typography
           variant="subtitle2"
           textAlign="center"
           color="text.secondary"
         >
-          {moment().format('dddd jD jMMMM jYYYY - H:mm')}
+          {moment().format('dddd jD jMMMM jYYYY - HH:mm')}
         </Typography>
         <TableContainer component={Paper} variant="outlined" sx={{ mt: 2 }}>
           <Table size="small">
-            {pricing.tipax ? (
-              <caption>هزینه تیپاکس پس‌کرایه بر عهده مشتری می باشد.</caption>
-            ) : (
-              <caption>
-                مجموع صورتحساب شامل {numFormat(pricing.cargo)} تومان هزینه پیک
-                می باشد.
-              </caption>
-            )}
+            <caption>
+              تاریخ بروزرسانی‌ قیمت لیر:&nbsp;
+              {moment.unix(pricing.date).format('jYYYY/jMM/jDD - HH:mm:ss')}
+            </caption>
             <TableHead>
               <TableRow>
-                <TableCell width={40}>ردیف</TableCell>
-                <TableCell>نام محصول</TableCell>
-                <TableCell align="right">وزن محصول</TableCell>
+                <TableCell align="center">قیمت لحظه ای لیر</TableCell>
+                <TableCell align="center">کارمزد خرید کالا</TableCell>
+                <TableCell align="center">قیمت نهایی</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              <TableRow>
-                <TableCell colSpan={3}>
-                  <Typography component="span" fontWeight={700}>
-                    مجموع:&nbsp;
+              <TableRow hover>
+                <TableCell align="center">
+                  {numFormat(pricing.try)} تومان
+                </TableCell>
+                <TableCell align="center">
+                  <Typography variant="subtitle2">
+                    {persianNumber(pricing.fee)} تومان
                   </Typography>
-                  <Typography component="span">
+                  <Typography
+                    component="s"
+                    variant="subtitle2"
+                    color="text.secondary"
+                  >
+                    ۴۰۰ تومان
+                  </Typography>
+                </TableCell>
+                <TableCell align="center">
+                  <Typography variant="subtitle2">
                     {numFormat(invoiceTotal)} تومان
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {parseFloat(pricing.subtotal)} لیر
                   </Typography>
                 </TableCell>
               </TableRow>
@@ -89,12 +101,12 @@ export default function PricingInvoice({ onEdit }) {
               مشخصات خریدار
             </Typography>
             <Typography gutterBottom>
-              {pricing.firstName} {pricing.lastName}
+              {customer.firstName} {customer.lastName}
             </Typography>
             <Typography gutterBottom>
-              {persianNumber(pricing.mobile)}
+              {persianNumber(customer.mobile)}
             </Typography>
-            <Typography>{pricing.address}</Typography>
+            <Typography>{customer.address}</Typography>
           </Grid>
           <Divider flexItem orientation="vertical">
             <Logo />
@@ -119,8 +131,8 @@ export default function PricingInvoice({ onEdit }) {
             حتما در توضیحات تراکنش ذکر شود: بابت پرداخت قرض و تادیه دیون
           </Typography>
           <Typography component="li" fontWeight={700}>
-            مشتری گرامی بعد از پرداخت، تصویر فیش واریزی را برای پشتیبانی ریالیر
-            ارسال کنید.
+            مشتری گرامی بعد از پرداخت، لطفاً تصویر فیش واریزی را برای پشتیبانی
+            ریالیر ارسال کنید.
           </Typography>
         </ul>
       </Box>

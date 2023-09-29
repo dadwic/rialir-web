@@ -20,7 +20,7 @@ import URL from '../../URL';
 moment.loadPersian({ usePersianDigits: true });
 
 export default function ShippingInvoice({ onEdit }) {
-  const { shipping } = useContext(AppContext);
+  const { customer, shipping } = useContext(AppContext);
   const subtotal =
     shipping.products.reduce((acc, obj) => {
       return acc + parseInt(obj.weight);
@@ -54,7 +54,7 @@ export default function ShippingInvoice({ onEdit }) {
           textAlign="center"
           color="text.secondary"
         >
-          {moment().format('dddd jD jMMMM jYYYY - H:mm')}
+          {moment().format('dddd jD jMMMM jYYYY - HH:mm')}
         </Typography>
         <TableContainer component={Paper} variant="outlined" sx={{ mt: 2 }}>
           <Table size="small">
@@ -104,12 +104,12 @@ export default function ShippingInvoice({ onEdit }) {
               مشخصات خریدار
             </Typography>
             <Typography gutterBottom>
-              {shipping.firstName} {shipping.lastName}
+              {customer.firstName} {customer.lastName}
             </Typography>
             <Typography gutterBottom>
-              {persianNumber(shipping.mobile)}
+              {persianNumber(customer.mobile)}
             </Typography>
-            <Typography>{shipping.address}</Typography>
+            <Typography>{customer.address}</Typography>
           </Grid>
           <Divider flexItem orientation="vertical">
             <Logo />
@@ -134,8 +134,8 @@ export default function ShippingInvoice({ onEdit }) {
             حتما در توضیحات تراکنش ذکر شود: بابت پرداخت قرض و تادیه دیون
           </Typography>
           <Typography component="li" fontWeight={700}>
-            مشتری گرامی بعد از پرداخت، تصویر فیش واریزی را برای پشتیبانی ریالیر
-            ارسال کنید.
+            مشتری گرامی بعد از پرداخت، لطفاً تصویر فیش واریزی را برای پشتیبانی
+            ریالیر ارسال کنید.
           </Typography>
         </ul>
       </Box>

@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import OneKIcon from '@mui/icons-material/OneK';
+import MoneyIcon from '@mui/icons-material/Money';
 import PricingIcon from '@mui/icons-material/CurrencyLira';
 import { AppContext, AppDispatchContext } from '../../context';
 import Copyright from '../../Copyright';
@@ -19,27 +19,29 @@ import Invoice from './Invoice';
 
 const schema = yup
   .object({
-    firstName: yup.string().required('نام الزامی است.'),
-    lastName: yup.string().required('نام خانوادگی الزامی است.'),
-    mobile: yup.string().required('شماره موبایل الزامی است.'),
-    address: yup.string().required('آدرس الزامی است.'),
+    customer: yup.object().shape({
+      firstName: yup.string().required('نام الزامی است.'),
+      lastName: yup.string().required('نام خانوادگی الزامی است.'),
+      mobile: yup.string().required('شماره موبایل الزامی است.'),
+      address: yup.string().required('آدرس الزامی است.'),
+    }),
     try: yup.string().required('قیمت لیر الزامی است.'),
     fee: yup.string().required('کارمزد الزامی است.'),
-    shipping: yup.string().required('هزینه باربری الزامی است.'),
+    subtotal: yup.string().required('قیمت محصولات الزامی است.'),
   })
   .required();
 
 export default function PricingForm() {
-  const store = useContext(AppContext);
   const dispatch = useContext(AppDispatchContext);
+  const { customer, pricing } = useContext(AppContext);
   const [editMode, setEditMode] = useState(true);
   const { control, handleSubmit, setValue } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: store.pricing,
+    defaultValues: { customer, ...pricing },
   });
 
-  const onSubmit = (data) => {
-    dispatch({ type: 'set_pricing', data });
+  const onSubmit = ({ customer, ...data }) => {
+    dispatch({ type: 'set_pricing', customer, data });
     setEditMode(false);
   };
 
@@ -83,7 +85,7 @@ export default function PricingForm() {
                 fullWidth
                 autoFocus
                 control={control}
-                name="firstName"
+                name="customer.firstName"
                 id="firstName"
                 label="نام"
               />
@@ -92,8 +94,8 @@ export default function PricingForm() {
               <Input
                 fullWidth
                 control={control}
+                name="customer.lastName"
                 id="lastName"
-                name="lastName"
                 label="نام خانوادگی"
               />
             </Grid>
@@ -103,7 +105,7 @@ export default function PricingForm() {
                 control={control}
                 type="tel"
                 id="mobile"
-                name="mobile"
+                name="customer.mobile"
                 inputProps={{ maxLength: 11 }}
                 label="شماره موبایل"
               />
@@ -112,8 +114,8 @@ export default function PricingForm() {
               <Input
                 fullWidth
                 control={control}
+                name="customer.address"
                 id="address"
-                name="address"
                 label="آدرس"
               />
             </Grid>
@@ -135,26 +137,27 @@ export default function PricingForm() {
                 id="fee"
                 name="fee"
                 label="کارمزد"
+                InputProps={{
+                  endAdornment: (
+                    <IconButton
+                      edge="end"
+                      title="همکار"
+                      onClick={() => setValue('fee', '100')}
+                    >
+                      <MoneyIcon />
+                    </IconButton>
+                  ),
+                }}
               />
             </Grid>
             <Grid item xs={12}>
               <Input
                 fullWidth
                 control={control}
-                type="tel"
-                id="shipping"
-                name="shipping"
-                label="هزینه باربری (تومان)"
-                InputProps={{
-                  endAdornment: (
-                    <IconButton
-                      edge="end"
-                      onClick={() => setValue('shipping', '250000')}
-                    >
-                      <OneKIcon />
-                    </IconButton>
-                  ),
-                }}
+                type="number"
+                id="subtotal"
+                name="subtotal"
+                label="قیمت محصولات (لیر)"
               />
             </Grid>
           </Grid>
