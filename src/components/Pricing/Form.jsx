@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import * as yup from 'yup';
-import { useFieldArray, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
@@ -8,15 +8,14 @@ import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import AddIcon from '@mui/icons-material/Add';
-import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
+import OneKIcon from '@mui/icons-material/OneK';
 import PricingIcon from '@mui/icons-material/CurrencyLira';
 import { AppContext, AppDispatchContext } from '../../context';
 import Copyright from '../../Copyright';
-import Checkbox from '../../Checkbox';
 import Input from '../../Input';
+import Invoice from './Invoice';
 
 const schema = yup
   .object({
@@ -24,31 +23,37 @@ const schema = yup
     lastName: yup.string().required('نام خانوادگی الزامی است.'),
     mobile: yup.string().required('شماره موبایل الزامی است.'),
     address: yup.string().required('آدرس الزامی است.'),
-    products: yup.array().of(
-      yup.object().shape({
-        name: yup.string().required('نام الزامی است.'),
-        weight: yup.string().required('وزن الزامی است.'),
-      })
-    ),
+    try: yup.string().required('قیمت لیر الزامی است.'),
+    fee: yup.string().required('کارمزد الزامی است.'),
+    shipping: yup.string().required('هزینه باربری الزامی است.'),
   })
   .required();
 
 export default function PricingForm() {
   const store = useContext(AppContext);
   const dispatch = useContext(AppDispatchContext);
-  const { control, handleSubmit, watch } = useForm({
+  const [editMode, setEditMode] = useState(true);
+  const { control, handleSubmit, setValue } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: store,
-  });
-  const { tipax } = watch();
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: 'products',
+    defaultValues: store.pricing,
   });
 
   const onSubmit = (data) => {
-    dispatch({ type: 'set_data', data });
+    dispatch({ type: 'set_pricing', data });
+    setEditMode(false);
   };
+
+  useEffect(() => {
+    fetch('https://www.rialir.com/wp-json/wp/v2/pricing')
+      .then((res) => res.json())
+      .then((data) => {
+        setValue('try', data?.try);
+        setValue('fee', data?.fee);
+        setValue('date', data?.date);
+      });
+  }, []);
+
+  if (!editMode) return <Invoice onEdit={() => setEditMode(true)} />;
 
   return (
     <Container component="main" maxWidth="xs">
@@ -112,75 +117,46 @@ export default function PricingForm() {
                 label="آدرس"
               />
             </Grid>
-            {fields.map((field, index) => (
-              <React.Fragment key={index}>
-                <Grid item xs={6}>
-                  <Input
-                    fullWidth
-                    key={field.id}
-                    id={field.id}
-                    control={control}
-                    name={`products.${index}.name`}
-                    label="نام محصول"
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <Input
-                    fullWidth
-                    key={field.id}
-                    id={field.id}
-                    control={control}
-                    name={`products.${index}.weight`}
-                    label="وزن محصول (گرم)"
-                    type="tel"
-                    InputProps={{
-                      endAdornment: (
-                        <IconButton
-                          color="error"
-                          disabled={index === 0}
-                          onClick={() => remove(index)}
-                        >
-                          <CloseIcon />
-                        </IconButton>
-                      ),
-                    }}
-                  />
-                  {index === 0 && (
-                    <Button
-                      fullWidth
-                      startIcon={<AddIcon />}
-                      variant="outlined"
-                      sx={{ mt: 2 }}
-                      onClick={() => append({ name: '', weight: '' })}
-                    >
-                      محصول جدید
-                    </Button>
-                  )}
-                </Grid>
-              </React.Fragment>
-            ))}
             <Grid item xs={6}>
-              <Checkbox
-                id="tipax"
-                name="tipax"
-                color="primary"
+              <Input
+                fullWidth
                 control={control}
-                defaultChecked={tipax}
-                label="تیپاکس"
+                type="tel"
+                id="try"
+                name="try"
+                label="قیمت لیر (تومان)"
               />
             </Grid>
-            {!tipax && (
-              <Grid item xs={6}>
-                <Input
-                  fullWidth
-                  control={control}
-                  type="tel"
-                  id="courier"
-                  name="courier"
-                  label="هزینه پیک (تومان)"
-                />
-              </Grid>
-            )}
+            <Grid item xs={6}>
+              <Input
+                fullWidth
+                control={control}
+                type="tel"
+                id="fee"
+                name="fee"
+                label="کارمزد"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Input
+                fullWidth
+                control={control}
+                type="tel"
+                id="shipping"
+                name="shipping"
+                label="هزینه باربری (تومان)"
+                InputProps={{
+                  endAdornment: (
+                    <IconButton
+                      edge="end"
+                      onClick={() => setValue('shipping', '250000')}
+                    >
+                      <OneKIcon />
+                    </IconButton>
+                  ),
+                }}
+              />
+            </Grid>
           </Grid>
           <Button
             fullWidth

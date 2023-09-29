@@ -3,14 +3,25 @@ import { AppContext, AppDispatchContext } from './context';
 
 export default function AppProvider({ children }) {
   const [store, dispatch] = useReducer(appReducer, {
-    edit: true,
-    tipax: true,
-    courier: '0',
-    firstName: '',
-    lastName: '',
-    mobile: '',
-    address: '',
-    products: [{ name: '', weight: '' }],
+    pricing: {
+      firstName: '',
+      lastName: '',
+      mobile: '',
+      address: '',
+      try: '0',
+      fee: '200',
+      shipping: '0',
+      date: null,
+    },
+    shipping: {
+      firstName: '',
+      lastName: '',
+      mobile: '',
+      address: '',
+      products: [{ name: '', weight: '' }],
+      tipax: true,
+      courier: '0',
+    },
   });
 
   return (
@@ -24,11 +35,11 @@ export default function AppProvider({ children }) {
 
 function appReducer(data, action) {
   switch (action.type) {
-    case 'set_data': {
-      return { ...action.data, edit: false };
+    case 'set_pricing': {
+      return { ...data, pricing: action.data };
     }
-    case 'edit_mode': {
-      return { ...data, edit: true };
+    case 'set_shipping': {
+      return { ...data, shipping: action.data };
     }
     default: {
       throw Error('Unknown action: ' + action.type);

@@ -12,24 +12,16 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { AppDispatchContext } from '../../context';
 import { numFormat, persianNumber } from '../../utils';
+import { AppContext } from '../../context';
 import Logo from '../../Logo';
 import URL from '../../URL';
 
 moment.loadPersian({ usePersianDigits: true });
 
-export default function PricingInvoice({ store }) {
-  const dispatch = useContext(AppDispatchContext);
-  const subtotal =
-    store.products.reduce((acc, object) => {
-      return acc + parseInt(object.weight);
-    }, 0) * 250;
-  const invoiceTotal = subtotal + parseInt(store.cargo);
-
-  const handleClick = () => {
-    dispatch({ type: 'edit_mode' });
-  };
+export default function PricingInvoice({ onEdit }) {
+  const { pricing } = useContext(AppContext);
+  const invoiceTotal = 1000;
 
   return (
     <Container component="main" maxWidth="xs">
@@ -39,7 +31,7 @@ export default function PricingInvoice({ store }) {
           flexDirection="column"
           alignItems="center"
           justifyContent="center"
-          onClick={handleClick}
+          onClick={onEdit}
         >
           <img src="/logo-2x.png" width={216} />
           <URL />
@@ -62,12 +54,12 @@ export default function PricingInvoice({ store }) {
         </Typography>
         <TableContainer component={Paper} variant="outlined" sx={{ mt: 2 }}>
           <Table size="small">
-            {store.tipax ? (
+            {pricing.tipax ? (
               <caption>هزینه تیپاکس پس‌کرایه بر عهده مشتری می باشد.</caption>
             ) : (
               <caption>
-                مجموع صورتحساب شامل {numFormat(store.cargo)} تومان هزینه پیک می
-                باشد.
+                مجموع صورتحساب شامل {numFormat(pricing.cargo)} تومان هزینه پیک
+                می باشد.
               </caption>
             )}
             <TableHead>
@@ -78,17 +70,6 @@ export default function PricingInvoice({ store }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {store.products.map((product, index) => (
-                <TableRow key={product.name}>
-                  <TableCell>{persianNumber(index + 1)}</TableCell>
-                  <TableCell component="th" scope="row">
-                    {product.name}
-                  </TableCell>
-                  <TableCell align="right">
-                    {numFormat(product.weight)} گرم
-                  </TableCell>
-                </TableRow>
-              ))}
               <TableRow>
                 <TableCell colSpan={3}>
                   <Typography component="span" fontWeight={700}>
@@ -108,10 +89,12 @@ export default function PricingInvoice({ store }) {
               مشخصات خریدار
             </Typography>
             <Typography gutterBottom>
-              {store.firstName} {store.lastName}
+              {pricing.firstName} {pricing.lastName}
             </Typography>
-            <Typography gutterBottom>{persianNumber(store.mobile)}</Typography>
-            <Typography>{store.address}</Typography>
+            <Typography gutterBottom>
+              {persianNumber(pricing.mobile)}
+            </Typography>
+            <Typography>{pricing.address}</Typography>
           </Grid>
           <Divider flexItem orientation="vertical">
             <Logo />

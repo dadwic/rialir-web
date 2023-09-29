@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import * as yup from 'yup';
 import { Link } from 'react-router-dom';
 import { useFieldArray, useForm } from 'react-hook-form';
@@ -17,6 +17,7 @@ import { AppContext, AppDispatchContext } from '../../context';
 import Copyright from '../../Copyright';
 import Checkbox from '../../Checkbox';
 import Input from '../../Input';
+import Invoice from './Invoice';
 
 const schema = yup
   .object({
@@ -36,9 +37,10 @@ const schema = yup
 export default function ShippingForm() {
   const store = useContext(AppContext);
   const dispatch = useContext(AppDispatchContext);
+  const [editMode, setEditMode] = useState(true);
   const { control, handleSubmit, watch } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: store,
+    defaultValues: store.shipping,
   });
   const { tipax } = watch();
   const { fields, append, remove } = useFieldArray({
@@ -47,8 +49,11 @@ export default function ShippingForm() {
   });
 
   const onSubmit = (data) => {
-    dispatch({ type: 'set_data', data });
+    dispatch({ type: 'set_shipping', data });
+    setEditMode(false);
   };
+
+  if (!editMode) return <Invoice onEdit={() => setEditMode(true)} />;
 
   return (
     <Container component="main" maxWidth="xs">
