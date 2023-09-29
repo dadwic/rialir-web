@@ -5,7 +5,7 @@ export default function AppProvider({ children }) {
   const [store, dispatch] = useReducer(appReducer, {
     edit: true,
     tipax: true,
-    cargo: '0',
+    courier: '0',
     firstName: '',
     lastName: '',
     mobile: '',

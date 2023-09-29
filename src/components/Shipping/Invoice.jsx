@@ -12,14 +12,14 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { AppDispatchContext } from './context';
-import { numFormat, persianNumber } from './utils';
-import Logo from './Logo';
-import URL from './URL';
+import { AppDispatchContext } from '../../context';
+import { numFormat, persianNumber } from '../../utils';
+import Logo from '../../Logo';
+import URL from '../../URL';
 
 moment.loadPersian({ usePersianDigits: true });
 
-export default function Invoice({ store }) {
+export default function ShippingInvoice({ store }) {
   const dispatch = useContext(AppDispatchContext);
   const subtotal =
     store.products.reduce((acc, object) => {

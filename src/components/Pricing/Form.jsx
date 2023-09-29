@@ -2,21 +2,21 @@ import React, { useContext } from 'react';
 import * as yup from 'yup';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Link } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
-import ShippingIcon from '@mui/icons-material/LocalShipping';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { AppDispatchContext } from './context';
-import Copyright from './Copyright';
-import Checkbox from './Checkbox';
-import Input from './Input';
+import PricingIcon from '@mui/icons-material/CurrencyLira';
+import { AppContext, AppDispatchContext } from '../../context';
+import Copyright from '../../Copyright';
+import Checkbox from '../../Checkbox';
+import Input from '../../Input';
 
 const schema = yup
   .object({
@@ -33,7 +33,8 @@ const schema = yup
   })
   .required();
 
-export default function Form({ store }) {
+export default function PricingForm() {
+  const store = useContext(AppContext);
   const dispatch = useContext(AppDispatchContext);
   const { control, handleSubmit, watch } = useForm({
     resolver: yupResolver(schema),
@@ -60,10 +61,10 @@ export default function Form({ store }) {
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
-          <ShippingIcon />
+          <PricingIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          محاسبه گر هزینه باربری
+          محاسبه گر قیمت نهایی کالا
         </Typography>
         <Box
           component="form"
@@ -174,8 +175,8 @@ export default function Form({ store }) {
                   fullWidth
                   control={control}
                   type="tel"
-                  id="cargo"
-                  name="cargo"
+                  id="courier"
+                  name="courier"
                   label="هزینه پیک (تومان)"
                 />
               </Grid>
@@ -186,21 +187,19 @@ export default function Form({ store }) {
             type="submit"
             size="large"
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ my: 2 }}
           >
             محاسبه
           </Button>
-          <Grid container justifyContent="flex-start">
-            <Grid item>
-              <Link
-                href="https://www.rialir.com/lir/"
-                variant="body2"
-                target="_blank"
-              >
-                محاسبه گر قیمت نهایی کالا
-              </Link>
-            </Grid>
-          </Grid>
+          <Button
+            fullWidth
+            LinkComponent={Link}
+            variant="outlined"
+            size="large"
+            to="/shipping"
+          >
+            محاسبه گر هزینه باربری
+          </Button>
         </Box>
       </Box>
       <Copyright sx={{ mt: 5 }} />
