@@ -65,7 +65,13 @@ export default function ShippingInvoice({ onEdit }) {
                 <TableCell align="right">وزن محصول</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody
+              sx={{
+                'tr:nth-of-type(odd)': {
+                  backgroundColor: (theme) => theme.palette.action.hover,
+                },
+              }}
+            >
               {shipping.products.map((product, index) => (
                 <TableRow key={product.name}>
                   <TableCell>{persianNumber(index + 1)}</TableCell>
@@ -85,7 +91,9 @@ export default function ShippingInvoice({ onEdit }) {
                 </TableCell>
               </TableRow>
               <TableRow
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                sx={{
+                  '&:last-child td, &:last-child th': { border: 0 },
+                }}
               >
                 <TableCell colSpan={3}>
                   {shipping.tipax ? (
@@ -135,10 +143,15 @@ export default function ShippingInvoice({ onEdit }) {
           توضیحات:
         </Typography>
         <ul>
-          <Typography component="li" fontWeight={700} gutterBottom>
-            حتما در توضیحات تراکنش ذکر شود: بابت پرداخت قرض و تادیه دیون
+          <Typography
+            component="li"
+            align="justify"
+            fontWeight={700}
+            gutterBottom
+          >
+            حتماً در توضیحات تراکنش ذکر شود: بابت پرداخت قرض و تادیه دیون
           </Typography>
-          <Typography component="li" fontWeight={700}>
+          <Typography component="li" align="justify" fontWeight={700}>
             مشتری گرامی بعد از پرداخت، لطفاً تصویر فیش واریزی را برای پشتیبانی
             ریالیر ارسال کنید.
           </Typography>

@@ -137,7 +137,7 @@ export default function PricingForm() {
                 type="tel"
                 id="fee"
                 name="fee"
-                label="کارمزد"
+                label="کارمزد (تومان)"
                 InputProps={{
                   endAdornment: (
                     <IconButton
@@ -158,7 +158,7 @@ export default function PricingForm() {
                 type="tel"
                 id="subtotal"
                 name="subtotal"
-                label="قیمت محصولات (لیر)"
+                label="قیمت محصولات (₺)"
                 InputProps={{
                   endAdornment: (
                     <IconButton
@@ -178,7 +178,7 @@ export default function PricingForm() {
                 type="tel"
                 id="decimal"
                 name="decimal"
-                label="کروش"
+                label="کروش (kr)"
                 control={control}
                 inputProps={{ maxLength: 2 }}
                 InputProps={{

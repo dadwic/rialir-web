@@ -62,14 +62,28 @@ export default function PricingInvoice({ onEdit }) {
                 <TableCell align="center">قیمت نهایی</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              <TableRow hover>
-                <TableCell align="center">
+            <TableBody
+              sx={{
+                'tr:nth-of-type(odd)': {
+                  backgroundColor: (theme) => theme.palette.action.hover,
+                },
+              }}
+            >
+              <TableRow>
+                <TableCell
+                  align="center"
+                  sx={{
+                    borderRight: '1px solid #e0e0e0',
+                  }}
+                >
                   <Typography variant="subtitle2">
                     {numFormat(pricing.try)} تومان
                   </Typography>
                 </TableCell>
-                <TableCell align="center">
+                <TableCell
+                  align="center"
+                  sx={{ borderRight: '1px solid #e0e0e0' }}
+                >
                   <Typography variant="subtitle2">
                     {persianNumber(pricing.fee)} تومان
                   </Typography>
@@ -88,7 +102,9 @@ export default function PricingInvoice({ onEdit }) {
                 </TableCell>
               </TableRow>
               <TableRow
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                sx={{
+                  '&:last-child td, &:last-child th': { border: 0 },
+                }}
               >
                 <TableCell colSpan={3}>
                   <Typography variant="subtitle2" color="text.secondary">
@@ -134,12 +150,26 @@ export default function PricingInvoice({ onEdit }) {
           توضیحات:
         </Typography>
         <ul>
-          <Typography component="li" fontWeight={700} gutterBottom>
-            حتما در توضیحات تراکنش ذکر شود: بابت پرداخت قرض و تادیه دیون
+          <Typography
+            component="li"
+            align="justify"
+            fontWeight={700}
+            gutterBottom
+          >
+            حتماً در توضیحات تراکنش ذکر شود: بابت پرداخت قرض و تادیه دیون
           </Typography>
-          <Typography component="li" fontWeight={700}>
+          <Typography
+            component="li"
+            align="justify"
+            fontWeight={700}
+            gutterBottom
+          >
             مشتری گرامی بعد از پرداخت، لطفاً تصویر فیش واریزی را برای پشتیبانی
             ریالیر ارسال کنید.
+          </Typography>
+          <Typography component="li" align="justify" fontWeight={700}>
+            مدت زمان تحویل سفارش: ۱۵ تا ۲۰ روز کاری بعد از تحویل کالا توسط
+            فروشنده به دفتر ریالیر در استانبول
           </Typography>
         </ul>
       </Box>
