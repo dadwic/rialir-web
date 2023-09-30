@@ -83,7 +83,6 @@ export default function PricingForm() {
             <Grid item xs={6}>
               <Input
                 fullWidth
-                autoFocus
                 control={control}
                 name="customer.firstName"
                 id="firstName"

@@ -12,7 +12,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { numFormat, persianNumber } from '../../utils';
+import { numFormat, persianNumber, tryFormat } from '../../utils';
 import { AppContext } from '../../context';
 import Logo from '../../Logo';
 import URL from '../../URL';
@@ -55,10 +55,6 @@ export default function PricingInvoice({ onEdit }) {
         </Typography>
         <TableContainer component={Paper} variant="outlined" sx={{ mt: 2 }}>
           <Table size="small">
-            <caption>
-              تاریخ بروزرسانی‌ قیمت لیر:&nbsp;
-              {moment.unix(pricing.date).format('jYYYY/jMM/jDD - HH:mm:ss')}
-            </caption>
             <TableHead>
               <TableRow>
                 <TableCell align="center">قیمت لحظه ای لیر</TableCell>
@@ -69,26 +65,37 @@ export default function PricingInvoice({ onEdit }) {
             <TableBody>
               <TableRow hover>
                 <TableCell align="center">
-                  {numFormat(pricing.try)} تومان
+                  <Typography variant="subtitle2">
+                    {numFormat(pricing.try)} تومان
+                  </Typography>
                 </TableCell>
                 <TableCell align="center">
                   <Typography variant="subtitle2">
                     {persianNumber(pricing.fee)} تومان
-                  </Typography>
-                  <Typography
-                    component="s"
-                    variant="subtitle2"
-                    color="text.secondary"
-                  >
-                    ۴۰۰ تومان
                   </Typography>
                 </TableCell>
                 <TableCell align="center">
                   <Typography variant="subtitle2">
                     {numFormat(invoiceTotal)} تومان
                   </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {parseFloat(pricing.subtotal)} لیر
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell colSpan={3}>
+                  <Typography variant="subtitle2">
+                    مجموع قیمت محصولات: {tryFormat(pricing.subtotal)} لیر
+                  </Typography>
+                </TableCell>
+              </TableRow>
+              <TableRow
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell colSpan={3}>
+                  <Typography variant="subtitle2" color="text.secondary">
+                    تاریخ بروزرسانی‌ قیمت لیر:&nbsp;
+                    {moment
+                      .unix(pricing.date)
+                      .format('jYYYY/jMM/jDD - HH:mm:ss')}
                   </Typography>
                 </TableCell>
               </TableRow>
