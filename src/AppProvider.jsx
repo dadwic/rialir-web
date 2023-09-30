@@ -13,6 +13,7 @@ export default function AppProvider({ children }) {
       try: '0',
       fee: '200',
       subtotal: '',
+      decimal: '',
       date: null,
     },
     shipping: {

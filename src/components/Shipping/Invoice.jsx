@@ -25,7 +25,7 @@ export default function ShippingInvoice({ onEdit }) {
     shipping.products.reduce((acc, obj) => {
       return acc + parseInt(obj.weight);
     }, 0) * 250;
-  const invoiceTotal = subtotal + parseInt(shipping.cargo);
+  const invoiceTotal = subtotal + parseInt(shipping.courier);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -58,14 +58,6 @@ export default function ShippingInvoice({ onEdit }) {
         </Typography>
         <TableContainer component={Paper} variant="outlined" sx={{ mt: 2 }}>
           <Table size="small">
-            {shipping.tipax ? (
-              <caption>هزینه تیپاکس پس‌کرایه بر عهده مشتری می باشد.</caption>
-            ) : (
-              <caption>
-                مجموع صورتحساب شامل {numFormat(shipping.cargo)} تومان هزینه پیک
-                می باشد.
-              </caption>
-            )}
             <TableHead>
               <TableRow>
                 <TableCell width={40}>ردیف</TableCell>
@@ -87,12 +79,25 @@ export default function ShippingInvoice({ onEdit }) {
               ))}
               <TableRow>
                 <TableCell colSpan={3}>
-                  <Typography component="span" fontWeight={700}>
-                    مجموع:&nbsp;
+                  <Typography variant="subtitle2">
+                    مجموع: {numFormat(invoiceTotal)} تومان
                   </Typography>
-                  <Typography component="span">
-                    {numFormat(invoiceTotal)} تومان
-                  </Typography>
+                </TableCell>
+              </TableRow>
+              <TableRow
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell colSpan={3}>
+                  {shipping.tipax ? (
+                    <Typography variant="subtitle2" color="text.secondary">
+                      هزینه تیپاکس پس‌کرایه بر عهده مشتری می باشد.
+                    </Typography>
+                  ) : (
+                    <Typography variant="subtitle2" color="text.secondary">
+                      مجموع صورتحساب شامل {numFormat(shipping.courier)} تومان
+                      هزینه پیک می باشد.
+                    </Typography>
+                  )}
                 </TableCell>
               </TableRow>
             </TableBody>

@@ -11,6 +11,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MoneyIcon from '@mui/icons-material/Money';
+import CloseIcon from '@mui/icons-material/Close';
 import PricingIcon from '@mui/icons-material/CurrencyLira';
 import { AppContext, AppDispatchContext } from '../../context';
 import Copyright from '../../Copyright';
@@ -35,10 +36,11 @@ export default function PricingForm() {
   const dispatch = useContext(AppDispatchContext);
   const { customer, pricing } = useContext(AppContext);
   const [editMode, setEditMode] = useState(true);
-  const { control, handleSubmit, setValue } = useForm({
+  const { control, handleSubmit, setValue, watch } = useForm({
     resolver: yupResolver(schema),
     defaultValues: { customer, ...pricing },
   });
+  const { subtotal, decimal } = watch();
 
   const onSubmit = ({ customer, ...data }) => {
     dispatch({ type: 'set_pricing', customer, data });
@@ -149,14 +151,51 @@ export default function PricingForm() {
                 }}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <Input
                 fullWidth
                 control={control}
-                type="number"
+                type="tel"
                 id="subtotal"
                 name="subtotal"
                 label="قیمت محصولات (لیر)"
+                InputProps={{
+                  endAdornment: (
+                    <IconButton
+                      edge="end"
+                      title="پاک کردن"
+                      onClick={() => setValue('subtotal', '')}
+                    >
+                      <CloseIcon />
+                    </IconButton>
+                  ),
+                }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <Input
+                fullWidth
+                type="tel"
+                id="decimal"
+                name="decimal"
+                label="کروش"
+                control={control}
+                inputProps={{ maxLength: 2 }}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton
+                      edge="end"
+                      title="Set decimal"
+                      disabled={!decimal}
+                      onClick={() => {
+                        setValue('subtotal', `${subtotal}.${decimal}`);
+                        setValue('decimal', '');
+                      }}
+                    >
+                      <MoneyIcon />
+                    </IconButton>
+                  ),
+                }}
               />
             </Grid>
           </Grid>
