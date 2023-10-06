@@ -27,6 +27,7 @@ const schema = yup
       mobile: yup.string().required('شماره موبایل الزامی است.'),
       address: yup.string().required('آدرس الزامی است.'),
     }),
+    rate: yup.string().required('نرخ باربری الزامی است.'),
     products: yup.array().of(
       yup.object().shape({
         name: yup.string().required('نام الزامی است.'),
@@ -40,7 +41,7 @@ export default function ShippingForm() {
   const dispatch = useContext(AppDispatchContext);
   const { customer, shipping } = useContext(AppContext);
   const [editMode, setEditMode] = useState(true);
-  const { control, handleSubmit, watch } = useForm({
+  const { control, handleSubmit, watch, setValue } = useForm({
     resolver: yupResolver(schema),
     defaultValues: { customer, ...shipping },
   });
@@ -118,6 +119,39 @@ export default function ShippingForm() {
                 label="آدرس"
               />
             </Grid>
+            <Grid item xs={6}>
+              <Input
+                fullWidth
+                control={control}
+                label="نرخ باربری"
+                name="rate"
+                id="rate"
+                type="tel"
+                InputProps={{
+                  endAdornment: (
+                    <Checkbox
+                      id="tipax"
+                      name="tipax"
+                      color="primary"
+                      control={control}
+                      defaultChecked={tipax}
+                      label="تیپاکس"
+                    />
+                  ),
+                }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <Input
+                fullWidth
+                disabled={tipax}
+                control={control}
+                type="tel"
+                id="courier"
+                name="courier"
+                label="هزینه پیک (تومان)"
+              />
+            </Grid>
             {fields.map((field, index) => (
               <React.Fragment key={index}>
                 <Grid item xs={6}>
@@ -165,28 +199,6 @@ export default function ShippingForm() {
                 </Grid>
               </React.Fragment>
             ))}
-            <Grid item xs={6}>
-              <Checkbox
-                id="tipax"
-                name="tipax"
-                color="primary"
-                control={control}
-                defaultChecked={tipax}
-                label="تیپاکس"
-              />
-            </Grid>
-            {!tipax && (
-              <Grid item xs={6}>
-                <Input
-                  fullWidth
-                  control={control}
-                  type="tel"
-                  id="courier"
-                  name="courier"
-                  label="هزینه پیک (تومان)"
-                />
-              </Grid>
-            )}
           </Grid>
           <Button
             fullWidth

@@ -24,8 +24,10 @@ export default function ShippingInvoice({ onEdit }) {
   const subtotal =
     shipping.products.reduce((acc, obj) => {
       return acc + parseInt(obj.weight);
-    }, 0) * 250;
-  const invoiceTotal = subtotal + parseInt(shipping.courier);
+    }, 0) * parseInt(shipping.rate);
+  const invoiceTotal = shipping.tipax
+    ? subtotal
+    : subtotal + parseInt(shipping.courier);
 
   return (
     <Container component="main" maxWidth="xs">

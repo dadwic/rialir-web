@@ -17,9 +17,10 @@ export default function AppProvider({ children }) {
       date: null,
     },
     shipping: {
-      tipax: true,
+      rate: '250',
       courier: '25000',
       products: [{ name: '', weight: '' }],
+      tipax: true,
     },
   });
 
