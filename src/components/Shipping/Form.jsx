@@ -123,22 +123,10 @@ export default function ShippingForm() {
               <Input
                 fullWidth
                 control={control}
-                label="نرخ باربری"
+                label="نرخ باربری (تومان)"
+                type="tel"
                 name="rate"
                 id="rate"
-                type="tel"
-                InputProps={{
-                  endAdornment: (
-                    <Checkbox
-                      id="tipax"
-                      name="tipax"
-                      color="primary"
-                      control={control}
-                      defaultChecked={tipax}
-                      label="تیپاکس"
-                    />
-                  ),
-                }}
               />
             </Grid>
             <Grid item xs={6}>
@@ -151,6 +139,27 @@ export default function ShippingForm() {
                 name="courier"
                 label="هزینه پیک (تومان)"
               />
+            </Grid>
+            <Grid item xs={6}>
+              <Checkbox
+                id="tipax"
+                name="tipax"
+                color="primary"
+                control={control}
+                defaultChecked={tipax}
+                label="تیپاکس"
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                fullWidth
+                size="large"
+                variant="outlined"
+                startIcon={<AddIcon />}
+                onClick={() => append({ name: '', weight: '' })}
+              >
+                محصول جدید
+              </Button>
             </Grid>
             {fields.map((field, index) => (
               <React.Fragment key={index}>
@@ -185,17 +194,6 @@ export default function ShippingForm() {
                       ),
                     }}
                   />
-                  {index === 0 && (
-                    <Button
-                      fullWidth
-                      startIcon={<AddIcon />}
-                      variant="outlined"
-                      sx={{ mt: 2 }}
-                      onClick={() => append({ name: '', weight: '' })}
-                    >
-                      محصول جدید
-                    </Button>
-                  )}
                 </Grid>
               </React.Fragment>
             ))}
