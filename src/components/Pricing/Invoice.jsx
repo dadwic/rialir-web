@@ -58,7 +58,7 @@ export default function PricingInvoice({ onEdit }) {
             <TableHead>
               <TableRow>
                 <TableCell align="center">قیمت لحظه ای لیر</TableCell>
-                <TableCell align="center">کارمزد خرید کالا</TableCell>
+                <TableCell align="center">کارمزد خرید</TableCell>
                 <TableCell align="center">قیمت نهایی</TableCell>
               </TableRow>
             </TableHead>
@@ -109,8 +109,8 @@ export default function PricingInvoice({ onEdit }) {
                 <TableCell colSpan={3}>
                   <Typography variant="subtitle2" color="text.secondary">
                     تاریخ بروزرسانی‌ قیمت لیر:&nbsp;
-                    {moment
-                      .unix(pricing.date)
+                    {moment(pricing.date || new Date().getTime())
+                      .zone('+0330')
                       .format('jYYYY/jMM/jDD - HH:mm:ss')}
                   </Typography>
                 </TableCell>
