@@ -119,8 +119,8 @@ export default function PricingInvoice({ onEdit }) {
           </Table>
         </TableContainer>
         <Grid container>
-          <Grid item xs sx={{ pb: 2 }}>
-            <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
+          <Grid item xs sx={{ py: 2 }}>
+            <Typography variant="h6" gutterBottom>
               مشخصات خریدار
             </Typography>
             <Typography gutterBottom>
@@ -129,27 +129,29 @@ export default function PricingInvoice({ onEdit }) {
             <Typography gutterBottom>
               {persianNumber(customer.mobile)}
             </Typography>
-            <Typography>{customer.address}</Typography>
+            <Typography>{persianNumber(customer.address)}</Typography>
           </Grid>
           <Divider flexItem orientation="vertical">
             <Logo />
           </Divider>
-          <Grid item xs sx={{ pb: 2, pl: 2.5 }}>
-            <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
+          <Grid item xs sx={{ py: 2 }}>
+            <Typography variant="h6" align="center" gutterBottom>
               روش پرداخت
             </Typography>
-            <Typography gutterBottom>شماره کارت بانک سامان</Typography>
-            <Typography fontWeight={700} gutterBottom>
+            <Typography align="center" gutterBottom>
+              شماره کارت بانک سامان
+            </Typography>
+            <Typography align="center" fontWeight={700} gutterBottom>
               6219&nbsp;8619&nbsp;0609&nbsp;8149
             </Typography>
-            <Typography>بنام مهرداد مهرعلیان</Typography>
+            <Typography align="center">بنام مهرداد مهرعلیان</Typography>
           </Grid>
         </Grid>
         <Divider sx={{ mb: 2 }} />
         <Typography fontWeight={700} gutterBottom>
           توضیحات:
         </Typography>
-        <ul>
+        <ul style={{ paddingInlineStart: '0.8em' }}>
           <Typography
             component="li"
             align="justify"

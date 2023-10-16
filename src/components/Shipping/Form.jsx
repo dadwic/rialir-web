@@ -141,14 +141,23 @@ export default function ShippingForm() {
               />
             </Grid>
             <Grid item xs={6}>
-              <Checkbox
-                id="tipax"
-                name="tipax"
-                color="primary"
-                control={control}
-                defaultChecked={tipax}
-                label="تیپاکس"
-              />
+              <Box
+                sx={{
+                  paddingLeft: 2,
+                  borderRadius: '4px',
+                  border: '1px solid rgba(0, 0, 0, 0.23)',
+                }}
+              >
+                <Checkbox
+                  fullWidth
+                  id="tipax"
+                  name="tipax"
+                  color="primary"
+                  control={control}
+                  defaultChecked={tipax}
+                  label="تیپاکس"
+                />
+              </Box>
             </Grid>
             <Grid item xs={6}>
               <Button
@@ -185,6 +194,7 @@ export default function ShippingForm() {
                     InputProps={{
                       endAdornment: (
                         <IconButton
+                          edge="end"
                           color="error"
                           disabled={index === 0}
                           onClick={() => remove(index)}
