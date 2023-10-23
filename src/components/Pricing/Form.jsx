@@ -180,7 +180,7 @@ export default function PricingForm() {
                 name="decimal"
                 label="کروش (kr)"
                 control={control}
-                inputProps={{ maxLength: 3 }}
+                inputProps={{ maxLength: 5 }}
                 InputProps={{
                   endAdornment: (
                     <IconButton

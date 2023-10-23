@@ -56,7 +56,7 @@ export default function ShippingInvoice({ onEdit }) {
           textAlign="center"
           color="text.secondary"
         >
-          {moment().format('dddd jD jMMMM jYYYY - HH:mm')}
+          {moment().zone('+0330').format('dddd jD jMMMM jYYYY - HH:mm')}
         </Typography>
         <TableContainer component={Paper} variant="outlined" sx={{ mt: 2 }}>
           <Table size="small">
