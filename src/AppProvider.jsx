@@ -22,6 +22,10 @@ export default function AppProvider({ children }) {
       products: [{ name: '', weight: '' }],
       tipax: true,
     },
+    waybill: {
+      subtotal: '',
+      barcode: 'https://www.rialir.com/',
+    },
   });
 
   return (
@@ -40,6 +44,9 @@ function appReducer(data, action) {
     }
     case 'set_shipping': {
       return { ...data, shipping: action.data, customer: action.customer };
+    }
+    case 'set_waybill': {
+      return { ...data, waybill: action.data, customer: action.customer };
     }
     default: {
       throw Error('Unknown action: ' + action.type);

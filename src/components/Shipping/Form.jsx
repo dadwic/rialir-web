@@ -7,14 +7,12 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
-import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import ShippingIcon from '@mui/icons-material/LocalShipping';
 import { AppContext, AppDispatchContext } from '../../context';
-import Copyright from '../../Copyright';
 import Checkbox from '../../Checkbox';
 import Input from '../../Input';
 import Invoice from './Invoice';
@@ -59,176 +57,173 @@ export default function ShippingForm() {
   if (!editMode) return <Invoice onEdit={() => setEditMode(true)} />;
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Box
+      sx={{
+        marginTop: 2,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
+      <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+        <ShippingIcon />
+      </Avatar>
+      <Typography component="h1" variant="h5">
+        محاسبه گر هزینه باربری
+      </Typography>
       <Box
-        sx={{
-          marginTop: 2,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
+        component="form"
+        onSubmit={handleSubmit(onSubmit)}
+        sx={{ mt: 3 }}
+        noValidate
       >
-        <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
-          <ShippingIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          محاسبه گر هزینه باربری
-        </Typography>
-        <Box
-          component="form"
-          onSubmit={handleSubmit(onSubmit)}
-          sx={{ mt: 3 }}
-          noValidate
-        >
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <Input
-                fullWidth
-                control={control}
-                name="customer.firstName"
-                id="firstName"
-                label="نام"
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <Input
-                fullWidth
-                control={control}
-                name="customer.lastName"
-                id="lastName"
-                label="نام خانوادگی"
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <Input
-                fullWidth
-                control={control}
-                type="tel"
-                id="mobile"
-                name="customer.mobile"
-                inputProps={{ maxLength: 11 }}
-                label="شماره موبایل"
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <Input
-                fullWidth
-                control={control}
-                name="customer.address"
-                id="address"
-                label="آدرس"
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <Input
-                fullWidth
-                control={control}
-                label="نرخ باربری (تومان)"
-                type="tel"
-                name="rate"
-                id="rate"
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <Input
-                fullWidth
-                disabled={tipax}
-                control={control}
-                type="tel"
-                id="courier"
-                name="courier"
-                label="هزینه پیک (تومان)"
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <Box
-                sx={{
-                  paddingLeft: 2,
-                  borderRadius: '4px',
-                  border: '1px solid rgba(0, 0, 0, 0.23)',
-                }}
-              >
-                <Checkbox
-                  fullWidth
-                  id="tipax"
-                  name="tipax"
-                  color="primary"
-                  control={control}
-                  defaultChecked={tipax}
-                  label="تیپاکس"
-                />
-              </Box>
-            </Grid>
-            <Grid item xs={6}>
-              <Button
-                fullWidth
-                size="large"
-                variant="outlined"
-                startIcon={<AddIcon />}
-                onClick={() => append({ name: '', weight: '' })}
-              >
-                محصول جدید
-              </Button>
-            </Grid>
-            {fields.map((field, index) => (
-              <React.Fragment key={index}>
-                <Grid item xs={6}>
-                  <Input
-                    fullWidth
-                    key={field.id}
-                    id={field.id}
-                    control={control}
-                    name={`products.${index}.name`}
-                    label="نام محصول"
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <Input
-                    fullWidth
-                    key={field.id}
-                    id={field.id}
-                    control={control}
-                    name={`products.${index}.weight`}
-                    label="وزن محصول (گرم)"
-                    type="tel"
-                    InputProps={{
-                      endAdornment: (
-                        <IconButton
-                          edge="end"
-                          color="error"
-                          disabled={index === 0}
-                          onClick={() => remove(index)}
-                        >
-                          <CloseIcon />
-                        </IconButton>
-                      ),
-                    }}
-                  />
-                </Grid>
-              </React.Fragment>
-            ))}
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <Input
+              fullWidth
+              control={control}
+              name="customer.firstName"
+              id="firstName"
+              label="نام"
+            />
           </Grid>
-          <Button
-            fullWidth
-            type="submit"
-            size="large"
-            variant="contained"
-            sx={{ my: 2 }}
-          >
-            محاسبه
-          </Button>
-          <Button
-            fullWidth
-            LinkComponent={Link}
-            variant="outlined"
-            size="large"
-            to="/"
-          >
-            محاسبه گر قیمت نهایی کالا
-          </Button>
-        </Box>
+          <Grid item xs={6}>
+            <Input
+              fullWidth
+              control={control}
+              name="customer.lastName"
+              id="lastName"
+              label="نام خانوادگی"
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Input
+              fullWidth
+              control={control}
+              type="tel"
+              id="mobile"
+              name="customer.mobile"
+              inputProps={{ maxLength: 11 }}
+              label="شماره موبایل"
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Input
+              fullWidth
+              control={control}
+              name="customer.address"
+              id="address"
+              label="آدرس"
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Input
+              fullWidth
+              control={control}
+              label="نرخ باربری (تومان)"
+              type="tel"
+              name="rate"
+              id="rate"
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Input
+              fullWidth
+              disabled={tipax}
+              control={control}
+              type="tel"
+              id="courier"
+              name="courier"
+              label="هزینه پیک (تومان)"
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Box
+              sx={{
+                paddingLeft: 2,
+                borderRadius: '4px',
+                border: '1px solid rgba(0, 0, 0, 0.23)',
+              }}
+            >
+              <Checkbox
+                fullWidth
+                id="tipax"
+                name="tipax"
+                color="primary"
+                control={control}
+                defaultChecked={tipax}
+                label="تیپاکس"
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={6}>
+            <Button
+              fullWidth
+              size="large"
+              variant="outlined"
+              startIcon={<AddIcon />}
+              onClick={() => append({ name: '', weight: '' })}
+            >
+              محصول جدید
+            </Button>
+          </Grid>
+          {fields.map((field, index) => (
+            <React.Fragment key={index}>
+              <Grid item xs={6}>
+                <Input
+                  fullWidth
+                  key={field.id}
+                  id={field.id}
+                  control={control}
+                  name={`products.${index}.name`}
+                  label="نام محصول"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <Input
+                  fullWidth
+                  key={field.id}
+                  id={field.id}
+                  control={control}
+                  name={`products.${index}.weight`}
+                  label="وزن محصول (گرم)"
+                  type="tel"
+                  InputProps={{
+                    endAdornment: (
+                      <IconButton
+                        edge="end"
+                        color="error"
+                        disabled={index === 0}
+                        onClick={() => remove(index)}
+                      >
+                        <CloseIcon />
+                      </IconButton>
+                    ),
+                  }}
+                />
+              </Grid>
+            </React.Fragment>
+          ))}
+        </Grid>
+        <Button
+          fullWidth
+          type="submit"
+          size="large"
+          variant="contained"
+          sx={{ my: 2 }}
+        >
+          محاسبه
+        </Button>
+        <Button
+          fullWidth
+          LinkComponent={Link}
+          variant="outlined"
+          size="large"
+          to="/"
+        >
+          محاسبه گر قیمت نهایی کالا
+        </Button>
       </Box>
-      <Copyright sx={{ mt: 5 }} />
-    </Container>
+    </Box>
   );
 }
