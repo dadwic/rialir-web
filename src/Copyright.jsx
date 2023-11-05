@@ -8,6 +8,7 @@ export default function Copyright(props) {
       variant="body2"
       color="text.secondary"
       align="center"
+      mt={5}
       {...props}
     >
       کلیه حقوق این وب‌سایت محفوظ و متعلق به{' '}

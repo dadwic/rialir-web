@@ -5,7 +5,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -14,6 +13,7 @@ import MoneyIcon from '@mui/icons-material/Money';
 import CloseIcon from '@mui/icons-material/Close';
 import PricingIcon from '@mui/icons-material/CurrencyLira';
 import { AppContext, AppDispatchContext } from '../../context';
+import Copyright from '../../Copyright';
 import Input from '../../Input';
 import Invoice from './Invoice';
 
@@ -206,27 +206,27 @@ export default function PricingForm() {
         >
           محاسبه
         </Button>
-        <Stack direction="row" spacing={2}>
-          <Button
-            fullWidth
-            LinkComponent={Link}
-            variant="outlined"
-            size="large"
-            to="/shipping"
-          >
-            محاسبه گر هزینه باربری
-          </Button>
-          <Button
-            fullWidth
-            LinkComponent={Link}
-            variant="outlined"
-            size="large"
-            to="/waybill"
-          >
-            صدور بارنامه
-          </Button>
-        </Stack>
+        <Button
+          fullWidth
+          LinkComponent={Link}
+          variant="outlined"
+          size="large"
+          to="/shipping"
+        >
+          محاسبه گر هزینه باربری
+        </Button>
+        <Button
+          fullWidth
+          LinkComponent={Link}
+          variant="outlined"
+          size="large"
+          to="/waybill"
+          sx={{ my: 2 }}
+        >
+          صدور بارنامه
+        </Button>
       </Box>
+      <Copyright />
     </Box>
   );
 }

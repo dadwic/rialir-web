@@ -24,7 +24,7 @@ export default function AppProvider({ children }) {
     },
     waybill: {
       subtotal: '',
-      barcode: 'https://www.rialir.com/',
+      barcode: 'https://www.rialir.com',
     },
   });
 

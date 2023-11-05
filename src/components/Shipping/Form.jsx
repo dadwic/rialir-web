@@ -13,6 +13,7 @@ import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import ShippingIcon from '@mui/icons-material/LocalShipping';
 import { AppContext, AppDispatchContext } from '../../context';
+import Copyright from '../../Copyright';
 import Checkbox from '../../Checkbox';
 import Input from '../../Input';
 import Invoice from './Invoice';
@@ -224,6 +225,7 @@ export default function ShippingForm() {
           محاسبه گر قیمت نهایی کالا
         </Button>
       </Box>
+      <Copyright />
     </Box>
   );
 }

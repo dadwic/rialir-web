@@ -33,7 +33,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/waybill',
-    element: <WaybillForm />,
+    element: (
+      <AppContainer>
+        <WaybillForm />
+      </AppContainer>
+    ),
   },
 ]);
 
