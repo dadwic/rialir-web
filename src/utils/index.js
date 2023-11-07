@@ -1,3 +1,5 @@
+import { toDataURL } from 'qrcode';
+
 const persianNumbers = ['۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹', '۰'];
 const englishNumbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 
@@ -28,3 +30,24 @@ export function ccyFormat(num) {
 export function numFormat(value) {
   return persianNumber(ccyFormat(value));
 }
+
+export const getQRCode = (value) => {
+  let qrValue = undefined;
+
+  toDataURL(
+    value,
+    {
+      width: 400,
+      margin: 2,
+    },
+    (err, url) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      qrValue = url;
+    }
+  );
+
+  return qrValue;
+};

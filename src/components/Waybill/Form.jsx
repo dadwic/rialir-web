@@ -20,12 +20,12 @@ import Waybill from './';
 const schema = yup
   .object({
     customer: yup.object().shape({
-      firstName: yup.string().required('نام الزامی است.'),
-      lastName: yup.string().required('نام خانوادگی الزامی است.'),
-      mobile: yup.string().required('شماره موبایل الزامی است.'),
-      address: yup.string().required('آدرس الزامی است.'),
+      // firstName: yup.string().required('نام الزامی است.'),
+      // lastName: yup.string().required('نام خانوادگی الزامی است.'),
+      // mobile: yup.string().required('شماره موبایل الزامی است.'),
+      // address: yup.string().required('آدرس الزامی است.'),
     }),
-    barcode: yup.string().required('بارکد الزامی است.'),
+    qrcode: yup.string().required('بارکد الزامی است.'),
     subtotal: yup.string().required('قیمت محصولات الزامی است.'),
   })
   .required();
@@ -111,9 +111,9 @@ export default function WaybillForm() {
             <Input
               fullWidth
               control={control}
-              name="barcode"
-              id="barcode"
-              label="بارکد"
+              name="qrcode"
+              id="qrcode"
+              label="QR code"
               inputProps={{ dir: 'ltr' }}
             />
           </Grid>

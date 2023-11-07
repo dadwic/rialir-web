@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { QRCodeSVG } from 'qrcode.react';
 import moment from 'moment-jalaali';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -12,24 +11,26 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { AppContext } from '../../context';
+import { getQRCode } from '../../utils';
 
 moment.loadPersian({ usePersianDigits: true });
 
 export default function Waybill({ onEdit }) {
   const { customer, waybill } = useContext(AppContext);
+  const qrValue = getQRCode(waybill.qrcode);
 
   return (
     <Box p={1}>
       <Stack direction="row">
         <Stack alignItems="center" onClick={onEdit} p={2}>
-          <img src="/logo-2x-000.png" width={100} />
-          <Typography variant="h6" textAlign="center" fontWeight={700} mt={1}>
+          <img src="/logo-2x-000.png" width={128} />
+          <Typography variant="h6" textAlign="center" fontWeight={200} mt={1}>
             بارنامه
           </Typography>
         </Stack>
-        <QRCodeSVG value="https://www.rialir.com/" />
+        <img src={qrValue} width={128} height={128} />
       </Stack>
-      <Typography variant="subtitle2" textAlign="center">
+      <Typography variant="subtitle2" textAlign="center" fontWeight={200}>
         {moment().zone('+0330').format('dddd jD jMMMM jYYYY - HH:mm')}
       </Typography>
       <TableContainer
@@ -39,7 +40,7 @@ export default function Waybill({ onEdit }) {
       >
         <Table size="small">
           <TableHead>
-            <TableRow sx={{ th: { borderColor: '#000' } }}>
+            <TableRow sx={{ th: { borderColor: '#000', fontWeight: 200 } }}>
               <TableCell>نام مشتری</TableCell>
               <TableCell>شماره تماس</TableCell>
             </TableRow>
@@ -47,18 +48,12 @@ export default function Waybill({ onEdit }) {
           <TableBody>
             <TableRow
               sx={{
-                td: { borderColor: '#000' },
+                td: { borderColor: '#000', fontWeight: 200 },
                 '&:last-child td, &:last-child th': { border: 0 },
               }}
             >
-              <TableCell>
-                <Typography variant="subtitle2">
-                  آقای مهرداد مهرعلیان
-                </Typography>
-              </TableCell>
-              <TableCell>
-                <Typography variant="subtitle2">۰۹۲۰۰۷۴۲۵۴۷</Typography>
-              </TableCell>
+              <TableCell>آقای مهرداد مهرعلیان</TableCell>
+              <TableCell>۰۹۲۰۰۷۴۲۵۴۷</TableCell>
             </TableRow>
           </TableBody>
         </Table>
