@@ -141,7 +141,7 @@ export default function PricingInvoice({ onEdit }) {
       </Grid>
       <Divider sx={{ mb: 2 }} />
       <Typography fontWeight={700} gutterBottom>
-        توضیحات:
+        توضیحات: {persianNumber(pricing.description)}
       </Typography>
       <ul style={{ paddingInlineStart: '0.8em' }}>
         <Typography

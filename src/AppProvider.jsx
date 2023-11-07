@@ -14,6 +14,7 @@ export default function AppProvider({ children }) {
       fee: '200',
       subtotal: '',
       decimal: '',
+      description: '',
       date: null,
     },
     shipping: {

@@ -196,6 +196,15 @@ export default function PricingForm() {
               }}
             />
           </Grid>
+          <Grid item xs={12}>
+            <Input
+              fullWidth
+              control={control}
+              name="description"
+              id="description"
+              label="توضیحات"
+            />
+          </Grid>
         </Grid>
         <Button
           fullWidth
