@@ -25,8 +25,8 @@ export default function AppProvider({ children }) {
     },
     waybill: {
       subtotal: '',
-      qrcode: 'https://www.rialir.com',
-      barcode: 'https://www.rialir.com',
+      qrcode: 'https://www.rialir.com/',
+      barcode: '09200742547',
     },
   });
 

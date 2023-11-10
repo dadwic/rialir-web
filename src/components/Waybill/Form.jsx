@@ -20,13 +20,12 @@ import Waybill from './';
 const schema = yup
   .object({
     customer: yup.object().shape({
-      // firstName: yup.string().required('نام الزامی است.'),
-      // lastName: yup.string().required('نام خانوادگی الزامی است.'),
-      // mobile: yup.string().required('شماره موبایل الزامی است.'),
-      // address: yup.string().required('آدرس الزامی است.'),
+      firstName: yup.string().required('نام الزامی است.'),
+      lastName: yup.string().required('نام خانوادگی الزامی است.'),
+      address: yup.string().required('آدرس الزامی است.'),
     }),
     qrcode: yup.string().required('بارکد الزامی است.'),
-    subtotal: yup.string().required('قیمت محصولات الزامی است.'),
+    barcode: yup.string().required('بارکد الزامی است.'),
   })
   .required();
 
@@ -117,51 +116,14 @@ export default function WaybillForm() {
               inputProps={{ dir: 'ltr' }}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12}>
             <Input
               fullWidth
               control={control}
-              type="tel"
-              id="subtotal"
-              name="subtotal"
-              label="قیمت محصولات (₺)"
-              InputProps={{
-                endAdornment: (
-                  <IconButton
-                    edge="end"
-                    title="پاک کردن"
-                    onClick={() => setValue('subtotal', '')}
-                  >
-                    <CloseIcon />
-                  </IconButton>
-                ),
-              }}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <Input
-              fullWidth
-              type="tel"
-              id="decimal"
-              name="decimal"
-              label="کروش (kr)"
-              control={control}
-              inputProps={{ maxLength: 5 }}
-              InputProps={{
-                endAdornment: (
-                  <IconButton
-                    edge="end"
-                    title="Set decimal"
-                    disabled={!decimal}
-                    onClick={() => {
-                      setValue('subtotal', `${subtotal}.${decimal}`);
-                      setValue('decimal', '');
-                    }}
-                  >
-                    <MoneyIcon />
-                  </IconButton>
-                ),
-              }}
+              name="barcode"
+              id="barcode"
+              label="بارکد"
+              inputProps={{ dir: 'ltr' }}
             />
           </Grid>
         </Grid>
