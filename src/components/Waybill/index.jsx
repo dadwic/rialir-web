@@ -5,10 +5,10 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import Typography from '@mui/material/Typography';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
+import TableBody from '@mui/material/TableBody';
+import TableContainer from '@mui/material/TableContainer';
 import { persianNumber } from '../../utils';
 import { AppContext } from '../../context';
 import { getQRCode } from '../../utils';
@@ -24,10 +24,20 @@ export default function Waybill({ onEdit }) {
       <Box display="flex" justifyContent="space-between" onClick={onEdit}>
         <div>
           <img src="/logo-2x-000.png" width={128} />
-          <Typography variant="body2" textAlign="center" fontWeight={300}>
-            خرید از ترکیه با ریالیر
+          <Typography
+            variant="body2"
+            textAlign="center"
+            fontFamily="IRANYekan"
+            fontWeight={700}
+          >
+            ریالیر | خرید از ترکیه
           </Typography>
-          <Typography variant="body2" textAlign="center">
+          <Typography
+            variant="body2"
+            textAlign="center"
+            fontWeight={700}
+            letterSpacing={2}
+          >
             www.rialir.com
           </Typography>
         </div>
@@ -39,24 +49,38 @@ export default function Waybill({ onEdit }) {
         sx={{ borderRadius: 0, borderColor: '#000' }}
       >
         <Table size="small">
-          <TableHead>
-            <TableRow sx={{ th: { borderColor: '#000', fontWeight: 200 } }}>
+          <TableBody
+            sx={{
+              tr: {
+                td: {
+                  fontFamily: 'IRANYekan',
+                  fontWeight: 700,
+                  borderColor: '#000',
+                },
+              },
+            }}
+          >
+            <TableRow>
               <TableCell>تاریخ:</TableCell>
               <TableCell>
                 {moment().zone('+0330').format('dddd jD jMMMM jYYYY - HH:mm')}
               </TableCell>
             </TableRow>
-            <TableRow sx={{ th: { borderColor: '#000', fontWeight: 200 } }}>
+            <TableRow>
               <TableCell>گیرنده:</TableCell>
               <TableCell>
                 {customer.firstName} {customer.lastName}
               </TableCell>
             </TableRow>
-            <TableRow sx={{ th: { borderColor: '#000', fontWeight: 200 } }}>
+            <TableRow
+              sx={{
+                '&:last-child td, &:last-child th': { border: 0 },
+              }}
+            >
               <TableCell>آدرس:</TableCell>
               <TableCell>{persianNumber(customer.address)}</TableCell>
             </TableRow>
-          </TableHead>
+          </TableBody>
         </Table>
       </TableContainer>
       <center>

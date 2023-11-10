@@ -16,7 +16,7 @@ import { AppContext } from '../../context';
 import Logo from '../../Logo';
 import URL from '../../URL';
 
-moment.loadPersian({ usePersianDigits: true });
+moment.loadPersian({ usePersianDigits: true, dialect: 'persian-modern' });
 
 export default function PricingInvoice({ onEdit }) {
   const { customer, pricing } = useContext(AppContext);

@@ -4,7 +4,7 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
   direction: 'rtl',
   typography: {
-    fontFamily: 'Vazirmatn',
+    fontFamily: ['Vazirmatn', 'IRANYekan'].join(','),
   },
   palette: {
     primary: {

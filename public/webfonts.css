@@ -1,0 +1,45 @@
+@font-face {
+  font-family: 'IRANYekan';
+  font-style: normal;
+  font-weight: 300;
+  src: url(./iranyekanweb/iranyekanweblight.eot?699085bdade384f68b8206f10fcbd914);
+  src:
+    url(./iranyekanweb/iranyekanweblight.eot?699085bdade384f68b8206f10fcbd914)
+      format('embedded-opentype'),
+    url(./iranyekanweb/iranyekanweblight.woff2?a80f71ff899a3f07228e1584b6426744)
+      format('woff2'),
+    url(./iranyekanweb/iranyekanweblight.woff?088dfe8a992231933d93128e54ae7da4)
+      format('woff'),
+    url(./iranyekanweb/iranyekanweblight.ttf?2c83275a16506746b3cbaf0c2e3eea68)
+      format('truetype');
+}
+@font-face {
+  font-family: 'IRANYekan';
+  font-style: normal;
+  font-weight: 400;
+  src: url(./iranyekanweb/iranyekanwebregular.eot?5bea6c32a95de7f8be577a95d65a85cc);
+  src:
+    url(./iranyekanweb/iranyekanwebregular.eot?5bea6c32a95de7f8be577a95d65a85cc)
+      format('embedded-opentype'),
+    url(./iranyekanweb/iranyekanwebregular.woff2?1fdcadecb1a82e89e6d2547bc027976e)
+      format('woff2'),
+    url(./iranyekanweb/iranyekanwebregular.woff?56a1baa4ead5aeac939b5dc2d94df837)
+      format('woff'),
+    url(./iranyekanweb/iranyekanwebregular.ttf?79533773cd43a707a69d89d5f4d07e85)
+      format('truetype');
+}
+@font-face {
+  font-family: 'IRANYekan';
+  font-style: normal;
+  font-weight: 700;
+  src: url(./iranyekanweb/iranyekanwebbold.eot?7c912e00bad2995b662cf8db5396357a);
+  src:
+    url(./iranyekanweb/iranyekanwebbold.eot?7c912e00bad2995b662cf8db5396357a)
+      format('embedded-opentype'),
+    url(./iranyekanweb/iranyekanwebbold.woff2?fe12f13a160a0abadd60db289937a1ef)
+      format('woff2'),
+    url(./iranyekanweb/iranyekanwebbold.woff?2d7cc7cd97d682b6ca62d2defc76dc5c)
+      format('woff'),
+    url(./iranyekanweb/iranyekanwebbold.ttf?a7d41f91c7dd7fe1f24947149e33b6c2)
+      format('truetype');
+}
