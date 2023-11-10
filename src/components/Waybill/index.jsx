@@ -35,8 +35,8 @@ export default function Waybill({ onEdit }) {
           <Typography
             variant="body2"
             textAlign="center"
+            fontFamily="monospace"
             fontWeight={700}
-            letterSpacing={2}
           >
             www.rialir.com
           </Typography>
@@ -46,7 +46,7 @@ export default function Waybill({ onEdit }) {
       <TableContainer
         component={Paper}
         variant="outlined"
-        sx={{ borderRadius: 0, borderColor: '#000' }}
+        sx={{ borderRadius: 0, borderWidth: 2, borderColor: '#000' }}
       >
         <Table size="small">
           <TableBody
@@ -54,8 +54,9 @@ export default function Waybill({ onEdit }) {
               tr: {
                 td: {
                   fontFamily: 'IRANYekan',
-                  fontWeight: 700,
                   borderColor: '#000',
+                  fontWeight: 700,
+                  borderWidth: 2,
                 },
               },
             }}
