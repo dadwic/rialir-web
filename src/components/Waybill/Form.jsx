@@ -70,7 +70,6 @@ export default function WaybillForm() {
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <Input
-              fullWidth
               control={control}
               name="customer.firstName"
               id="firstName"
@@ -79,7 +78,6 @@ export default function WaybillForm() {
           </Grid>
           <Grid item xs={6}>
             <Input
-              fullWidth
               control={control}
               name="customer.lastName"
               id="lastName"
@@ -88,7 +86,6 @@ export default function WaybillForm() {
           </Grid>
           <Grid item xs={6}>
             <Input
-              fullWidth
               control={control}
               type="tel"
               id="mobile"
@@ -99,7 +96,6 @@ export default function WaybillForm() {
           </Grid>
           <Grid item xs={6}>
             <Input
-              fullWidth
               control={control}
               name="customer.address"
               id="address"
@@ -108,7 +104,6 @@ export default function WaybillForm() {
           </Grid>
           <Grid item xs={12}>
             <Input
-              fullWidth
               control={control}
               name="qrcode"
               id="qrcode"
@@ -118,7 +113,6 @@ export default function WaybillForm() {
           </Grid>
           <Grid item xs={12}>
             <Input
-              fullWidth
               control={control}
               name="barcode"
               id="barcode"

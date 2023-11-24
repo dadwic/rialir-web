@@ -82,7 +82,6 @@ export default function PricingForm() {
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <Input
-              fullWidth
               control={control}
               name="customer.firstName"
               id="firstName"
@@ -91,7 +90,6 @@ export default function PricingForm() {
           </Grid>
           <Grid item xs={6}>
             <Input
-              fullWidth
               control={control}
               name="customer.lastName"
               id="lastName"
@@ -100,7 +98,6 @@ export default function PricingForm() {
           </Grid>
           <Grid item xs={6}>
             <Input
-              fullWidth
               control={control}
               type="tel"
               id="mobile"
@@ -111,7 +108,6 @@ export default function PricingForm() {
           </Grid>
           <Grid item xs={6}>
             <Input
-              fullWidth
               control={control}
               name="customer.address"
               id="address"
@@ -120,7 +116,6 @@ export default function PricingForm() {
           </Grid>
           <Grid item xs={6}>
             <Input
-              fullWidth
               control={control}
               type="tel"
               id="try"
@@ -130,7 +125,6 @@ export default function PricingForm() {
           </Grid>
           <Grid item xs={6}>
             <Input
-              fullWidth
               control={control}
               type="tel"
               id="fee"
@@ -151,7 +145,6 @@ export default function PricingForm() {
           </Grid>
           <Grid item xs={6}>
             <Input
-              fullWidth
               control={control}
               type="tel"
               id="subtotal"
@@ -172,7 +165,6 @@ export default function PricingForm() {
           </Grid>
           <Grid item xs={6}>
             <Input
-              fullWidth
               type="tel"
               id="decimal"
               name="decimal"
@@ -198,7 +190,6 @@ export default function PricingForm() {
           </Grid>
           <Grid item xs={12}>
             <Input
-              fullWidth
               control={control}
               name="description"
               id="description"

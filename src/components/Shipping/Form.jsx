@@ -81,7 +81,6 @@ export default function ShippingForm() {
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <Input
-              fullWidth
               control={control}
               name="customer.firstName"
               id="firstName"
@@ -90,7 +89,6 @@ export default function ShippingForm() {
           </Grid>
           <Grid item xs={6}>
             <Input
-              fullWidth
               control={control}
               name="customer.lastName"
               id="lastName"
@@ -99,18 +97,16 @@ export default function ShippingForm() {
           </Grid>
           <Grid item xs={6}>
             <Input
-              fullWidth
               control={control}
               type="tel"
               id="mobile"
+              label="شماره موبایل"
               name="customer.mobile"
               inputProps={{ maxLength: 11 }}
-              label="شماره موبایل"
             />
           </Grid>
           <Grid item xs={6}>
             <Input
-              fullWidth
               control={control}
               name="customer.address"
               id="address"
@@ -119,7 +115,6 @@ export default function ShippingForm() {
           </Grid>
           <Grid item xs={6}>
             <Input
-              fullWidth
               control={control}
               label="نرخ باربری (تومان)"
               type="tel"
@@ -129,7 +124,6 @@ export default function ShippingForm() {
           </Grid>
           <Grid item xs={6}>
             <Input
-              fullWidth
               disabled={tipax}
               control={control}
               type="tel"
@@ -147,7 +141,6 @@ export default function ShippingForm() {
               }}
             >
               <Checkbox
-                fullWidth
                 id="tipax"
                 name="tipax"
                 color="primary"
@@ -172,7 +165,6 @@ export default function ShippingForm() {
             <React.Fragment key={index}>
               <Grid item xs={6}>
                 <Input
-                  fullWidth
                   key={field.id}
                   id={field.id}
                   control={control}
@@ -182,7 +174,6 @@ export default function ShippingForm() {
               </Grid>
               <Grid item xs={6}>
                 <Input
-                  fullWidth
                   key={field.id}
                   id={field.id}
                   control={control}
