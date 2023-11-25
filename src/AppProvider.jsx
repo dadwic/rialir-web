@@ -4,7 +4,7 @@ import { AppContext, AppDispatchContext } from './context';
 export default function AppProvider({ children }) {
   const [store, dispatch] = useReducer(appReducer, {
     customer: {
-      firstName: '',
+      firstName: 'خانم ',
       lastName: '',
       mobile: '',
       address: '',

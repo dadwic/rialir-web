@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MoneyIcon from '@mui/icons-material/Money';
 import CloseIcon from '@mui/icons-material/Close';
+import ManIcon from '@mui/icons-material/Man';
 import PricingIcon from '@mui/icons-material/CurrencyLira';
 import { AppContext, AppDispatchContext } from '../../context';
 import Copyright from '../../Copyright';
@@ -86,6 +87,16 @@ export default function PricingForm() {
               name="customer.firstName"
               id="firstName"
               label="نام"
+              InputProps={{
+                endAdornment: (
+                  <IconButton
+                    edge="end"
+                    onClick={() => setValue('customer.firstName', 'آقای ')}
+                  >
+                    <ManIcon />
+                  </IconButton>
+                ),
+              }}
             />
           </Grid>
           <Grid item xs={6}>
