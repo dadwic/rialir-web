@@ -137,16 +137,11 @@ export default function ShippingInvoice({ onEdit }) {
       </Grid>
       <Divider sx={{ mb: 2 }} />
       <Typography fontWeight={700} gutterBottom>
-        توضیحات:
+        توضیحات: {persianNumber(shipping.description)}
       </Typography>
-      <ul style={{ paddingInlineStart: '0.8em' }}>
-        <Typography
-          component="li"
-          align="justify"
-          fontWeight={700}
-          gutterBottom
-        >
-          علت تراکنش را بابت پرداخت قرض و تادیه دیون انتخاب کنید.
+      <ul style={{ paddingInlineStart: '1em' }}>
+        <Typography component="li" fontWeight={700} gutterBottom>
+          در علت تراکنش ذکر شود: بابت پرداخت قرض و تادیه دیون
         </Typography>
         <Typography component="li" align="justify" fontWeight={700}>
           مشتری گرامی بعد از پرداخت، لطفاً تصویر فیش واریزی را برای پشتیبانی

@@ -156,14 +156,9 @@ export default function PricingInvoice({ onEdit }) {
       <Typography fontWeight={700} gutterBottom>
         توضیحات: {persianNumber(pricing.description)}
       </Typography>
-      <ul style={{ paddingInlineStart: '0.8em' }}>
-        <Typography
-          component="li"
-          align="justify"
-          fontWeight={700}
-          gutterBottom
-        >
-          علت تراکنش را بابت پرداخت قرض و تادیه دیون انتخاب کنید.
+      <ul style={{ paddingInlineStart: '1em' }}>
+        <Typography component="li" fontWeight={700} gutterBottom>
+          در علت تراکنش ذکر شود: بابت پرداخت قرض و تادیه دیون
         </Typography>
         <Typography
           component="li"

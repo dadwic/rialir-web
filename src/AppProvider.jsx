@@ -22,6 +22,7 @@ export default function AppProvider({ children }) {
       rate: '250',
       courier: '25000',
       products: [{ name: '', weight: '', shoe: false }],
+      description: '',
       tipax: true,
     },
     waybill: {

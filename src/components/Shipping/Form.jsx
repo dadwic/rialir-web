@@ -184,6 +184,14 @@ export default function ShippingForm() {
               </Grid>
             </React.Fragment>
           ))}
+          <Grid item xs={12}>
+            <Input
+              control={control}
+              name="description"
+              id="description"
+              label="توضیحات"
+            />
+          </Grid>
         </Grid>
         <Button
           fullWidth

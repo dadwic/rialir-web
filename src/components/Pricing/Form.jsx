@@ -166,23 +166,14 @@ export default function PricingForm() {
             />
           </Grid>
           <Grid item xs={12}>
-            <Box
-              sx={{
-                py: 1,
-                paddingLeft: 2,
-                borderRadius: '4px',
-                border: '1px solid rgba(0, 0, 0, 0.23)',
-              }}
-            >
-              <Checkbox
-                id="discount"
-                name="discount"
-                color="primary"
-                control={control}
-                defaultChecked={discount}
-                label="تخفیف"
-              />
-            </Box>
+            <Checkbox
+              id="discount"
+              name="discount"
+              color="primary"
+              control={control}
+              defaultChecked={discount}
+              label="تخفیف ۵۰٪ کارمزد خرید (حداکثر ۵۰ هزار تومان)"
+            />
           </Grid>
         </Grid>
         <Button
