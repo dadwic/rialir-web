@@ -172,7 +172,7 @@ export default function PricingForm() {
               color="primary"
               control={control}
               defaultChecked={discount}
-              label="تخفیف ۵۰٪ کارمزد خرید (حداکثر ۵۰ هزار تومان)"
+              label="تخفیف ۲۵٪ کارمزد خرید (حداکثر ۵۰ هزار تومان)"
             />
           </Grid>
         </Grid>

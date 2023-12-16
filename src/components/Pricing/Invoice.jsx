@@ -24,7 +24,7 @@ export default function PricingInvoice({ onEdit }) {
   const subtotal = parseFloat(pricing.subtotal);
   const fee = parseInt(pricing.fee);
   const rate = parseInt(pricing.try) + fee;
-  const dsc = (fee / 2) * subtotal;
+  const dsc = fee * subtotal * 0.25;
   const discount = dsc > 50000 ? 50000 : dsc;
   let invoiceTotal = rate * subtotal;
   if (incDsc) invoiceTotal -= discount;
@@ -85,7 +85,7 @@ export default function PricingInvoice({ onEdit }) {
                 sx={{ borderRight: '1px solid #e0e0e0' }}
               >
                 <Typography variant="subtitle2">
-                  {persianNumber(incDsc ? fee / 2 : fee)} تومان
+                  {persianNumber(incDsc ? fee * 0.75 : fee)} تومان
                 </Typography>
               </TableCell>
               <TableCell align="center">
