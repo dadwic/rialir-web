@@ -15,6 +15,7 @@ import PricingIcon from '@mui/icons-material/CurrencyLira';
 import { AppContext, AppDispatchContext } from '../../context';
 import CustomerFields from '../Form/CustomerFields';
 import Copyright from '../../Copyright';
+import Checkbox from '../Form/Checkbox';
 import Input from '../Form/Input';
 import Invoice from './Invoice';
 
@@ -40,7 +41,7 @@ export default function PricingForm() {
     resolver: yupResolver(schema),
     defaultValues: { customer, ...pricing },
   });
-  const { subtotal, decimal } = watch();
+  const { subtotal, discount, decimal } = watch();
 
   const onSubmit = ({ customer, ...data }) => {
     dispatch({ type: 'set_pricing', customer, data });
@@ -164,6 +165,25 @@ export default function PricingForm() {
               label="توضیحات"
             />
           </Grid>
+          <Grid item xs={12}>
+            <Box
+              sx={{
+                py: 1,
+                paddingLeft: 2,
+                borderRadius: '4px',
+                border: '1px solid rgba(0, 0, 0, 0.23)',
+              }}
+            >
+              <Checkbox
+                id="discount"
+                name="discount"
+                color="primary"
+                control={control}
+                defaultChecked={discount}
+                label="تخفیف"
+              />
+            </Box>
+          </Grid>
         </Grid>
         <Button
           fullWidth
@@ -192,6 +212,14 @@ export default function PricingForm() {
           sx={{ my: 2 }}
         >
           صدور بارنامه
+        </Button>
+        <Button
+          fullWidth
+          size="large"
+          variant="outlined"
+          href="https://www.rialir.com/lir/"
+        >
+          قیمت لحظه ای لیر
         </Button>
       </Box>
       <Copyright />

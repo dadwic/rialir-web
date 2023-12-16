@@ -20,8 +20,14 @@ moment.loadPersian({ usePersianDigits: true, dialect: 'persian-modern' });
 
 export default function PricingInvoice({ onEdit }) {
   const { customer, pricing } = useContext(AppContext);
-  const rate = parseInt(pricing.try) + parseInt(pricing.fee);
-  const invoiceTotal = rate * parseFloat(pricing.subtotal);
+  const incDsc = pricing.discount;
+  const subtotal = parseFloat(pricing.subtotal);
+  const fee = parseInt(pricing.fee);
+  const rate = parseInt(pricing.try) + fee;
+  const dsc = (fee / 2) * subtotal;
+  const discount = dsc > 50000 ? 50000 : dsc;
+  let invoiceTotal = rate * subtotal;
+  if (incDsc) invoiceTotal -= discount;
 
   return (
     <Box mt={2}>
@@ -79,21 +85,28 @@ export default function PricingInvoice({ onEdit }) {
                 sx={{ borderRight: '1px solid #e0e0e0' }}
               >
                 <Typography variant="subtitle2">
-                  {persianNumber(pricing.fee)} تومان
+                  {persianNumber(incDsc ? fee / 2 : fee)} تومان
                 </Typography>
               </TableCell>
               <TableCell align="center">
-                <Typography variant="subtitle2">
+                <Typography variant="subtitle2" fontWeight={700}>
                   {numFormat(invoiceTotal)} تومان
                 </Typography>
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell colSpan={3}>
+              <TableCell colSpan={incDsc ? 2 : 3}>
                 <Typography variant="subtitle2">
-                  مجموع قیمت محصولات: {tryFormat(pricing.subtotal)} لیر
+                  قیمت محصولات: {tryFormat(pricing.subtotal)} لیر
                 </Typography>
               </TableCell>
+              {incDsc && (
+                <TableCell sx={{ borderLeft: '1px solid #e0e0e0' }}>
+                  <Typography variant="subtitle2">
+                    تخفیف: {numFormat(discount)} تومان
+                  </Typography>
+                </TableCell>
+              )}
             </TableRow>
             <TableRow
               sx={{
@@ -150,7 +163,7 @@ export default function PricingInvoice({ onEdit }) {
           fontWeight={700}
           gutterBottom
         >
-          حتماً در توضیحات تراکنش ذکر شود: بابت پرداخت قرض و تادیه دیون
+          علت تراکنش را بابت پرداخت قرض و تادیه دیون انتخاب کنید.
         </Typography>
         <Typography
           component="li"

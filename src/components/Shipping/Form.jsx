@@ -14,8 +14,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import ShippingIcon from '@mui/icons-material/LocalShipping';
-import JoinOutlinedIcon from '@mui/icons-material/JoinInnerOutlined';
-import FullOutlinedIcon from '@mui/icons-material/JoinFullOutlined';
 import { AppContext, AppDispatchContext } from '../../context';
 import Copyright from '../../Copyright';
 import CustomerFields from '../Form/CustomerFields';
@@ -144,8 +142,8 @@ export default function ShippingForm() {
                   label="نام محصول"
                   InputProps={{
                     endAdornment: (
-                      <Tooltip title="کفش">
-                        <InputAdornment position="end">
+                      <InputAdornment position="end" sx={{ mr: -1.5 }}>
+                        <Tooltip title="کفش">
                           <Checkbox
                             edge="end"
                             color="primary"
@@ -153,11 +151,9 @@ export default function ShippingForm() {
                             defaultChecked={products[index].shoe}
                             name={`products.${index}.shoe`}
                             control={control}
-                            icon={<JoinOutlinedIcon />}
-                            checkedIcon={<FullOutlinedIcon />}
                           />
-                        </InputAdornment>
-                      </Tooltip>
+                        </Tooltip>
+                      </InputAdornment>
                     ),
                   }}
                 />
