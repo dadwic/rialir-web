@@ -22,6 +22,7 @@ export default function ShippingInvoice({ onEdit }) {
   const { customer, shipping } = useContext(AppContext);
   const subtotal =
     shipping.products.reduce((acc, obj) => {
+      if (obj.shoe) return acc + parseInt(obj.weight) * 1000;
       return acc + parseInt(obj.weight);
     }, 0) * parseInt(shipping.rate);
   const invoiceTotal = shipping.tipax
@@ -58,7 +59,7 @@ export default function ShippingInvoice({ onEdit }) {
             <TableRow>
               <TableCell width={40}>ردیف</TableCell>
               <TableCell>نام محصول</TableCell>
-              <TableCell align="right">وزن محصول</TableCell>
+              <TableCell align="right">مقدار محصول</TableCell>
             </TableRow>
           </TableHead>
           <TableBody
@@ -75,7 +76,7 @@ export default function ShippingInvoice({ onEdit }) {
                   {product.name}
                 </TableCell>
                 <TableCell align="right">
-                  {numFormat(product.weight)} گرم
+                  {numFormat(product.weight)} {product.shoe ? 'جفت' : 'گرم'}
                 </TableCell>
               </TableRow>
             ))}

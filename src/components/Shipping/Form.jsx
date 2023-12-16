@@ -7,15 +7,20 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
+import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import ShippingIcon from '@mui/icons-material/LocalShipping';
+import JoinOutlinedIcon from '@mui/icons-material/JoinInnerOutlined';
+import FullOutlinedIcon from '@mui/icons-material/JoinFullOutlined';
 import { AppContext, AppDispatchContext } from '../../context';
 import Copyright from '../../Copyright';
-import Checkbox from '../../Checkbox';
-import Input from '../../Input';
+import CustomerFields from '../Form/CustomerFields';
+import Checkbox from '../Form/Checkbox';
+import Input from '../Form/Input';
 import Invoice from './Invoice';
 
 const schema = yup
@@ -30,7 +35,7 @@ const schema = yup
     products: yup.array().of(
       yup.object().shape({
         name: yup.string().required('نام الزامی است.'),
-        weight: yup.string().required('وزن الزامی است.'),
+        weight: yup.string().required('وزن/تعداد الزامی است.'),
       })
     ),
   })
@@ -44,7 +49,7 @@ export default function ShippingForm() {
     resolver: yupResolver(schema),
     defaultValues: { customer, ...shipping },
   });
-  const { tipax } = watch();
+  const { tipax, products } = watch();
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'products',
@@ -79,40 +84,7 @@ export default function ShippingForm() {
         noValidate
       >
         <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <Input
-              control={control}
-              name="customer.firstName"
-              id="firstName"
-              label="نام"
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <Input
-              control={control}
-              name="customer.lastName"
-              id="lastName"
-              label="نام خانوادگی"
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <Input
-              control={control}
-              type="tel"
-              id="mobile"
-              label="شماره موبایل"
-              name="customer.mobile"
-              inputProps={{ maxLength: 11 }}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <Input
-              control={control}
-              name="customer.address"
-              id="address"
-              label="آدرس"
-            />
-          </Grid>
+          <CustomerFields control={control} setValue={setValue} />
           <Grid item xs={6}>
             <Input
               control={control}
@@ -156,7 +128,7 @@ export default function ShippingForm() {
               size="large"
               variant="outlined"
               startIcon={<AddIcon />}
-              onClick={() => append({ name: '', weight: '' })}
+              onClick={() => append({ name: '', weight: '', shoe: false })}
             >
               محصول جدید
             </Button>
@@ -170,6 +142,24 @@ export default function ShippingForm() {
                   control={control}
                   name={`products.${index}.name`}
                   label="نام محصول"
+                  InputProps={{
+                    endAdornment: (
+                      <Tooltip title="کفش">
+                        <InputAdornment position="end">
+                          <Checkbox
+                            edge="end"
+                            color="primary"
+                            id={`shoe-${index}`}
+                            defaultChecked={products[index].shoe}
+                            name={`products.${index}.shoe`}
+                            control={control}
+                            icon={<JoinOutlinedIcon />}
+                            checkedIcon={<FullOutlinedIcon />}
+                          />
+                        </InputAdornment>
+                      </Tooltip>
+                    ),
+                  }}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -178,7 +168,9 @@ export default function ShippingForm() {
                   id={field.id}
                   control={control}
                   name={`products.${index}.weight`}
-                  label="وزن محصول (گرم)"
+                  label={
+                    products[index].shoe ? 'تعداد جفت کفش' : 'وزن محصول (گرم)'
+                  }
                   type="tel"
                   InputProps={{
                     endAdornment: (

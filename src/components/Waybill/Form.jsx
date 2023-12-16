@@ -8,13 +8,11 @@ import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MoneyIcon from '@mui/icons-material/Money';
-import CloseIcon from '@mui/icons-material/Close';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import { AppContext, AppDispatchContext } from '../../context';
+import CustomerFields from '../Form/CustomerFields';
 import Copyright from '../../Copyright';
-import Input from '../../Input';
+import Input from '../Form/Input';
 import Waybill from './';
 
 const schema = yup
@@ -33,11 +31,10 @@ export default function WaybillForm() {
   const dispatch = useContext(AppDispatchContext);
   const { customer, waybill } = useContext(AppContext);
   const [editMode, setEditMode] = useState(true);
-  const { control, handleSubmit, setValue, watch } = useForm({
+  const { control, handleSubmit, setValue } = useForm({
     resolver: yupResolver(schema),
     defaultValues: { customer, ...waybill },
   });
-  const { subtotal, decimal } = watch();
 
   const onSubmit = ({ customer, ...data }) => {
     dispatch({ type: 'set_waybill', customer, data });
@@ -68,40 +65,7 @@ export default function WaybillForm() {
         noValidate
       >
         <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <Input
-              control={control}
-              name="customer.firstName"
-              id="firstName"
-              label="نام"
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <Input
-              control={control}
-              name="customer.lastName"
-              id="lastName"
-              label="نام خانوادگی"
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <Input
-              control={control}
-              type="tel"
-              id="mobile"
-              name="customer.mobile"
-              inputProps={{ maxLength: 11 }}
-              label="شماره موبایل"
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <Input
-              control={control}
-              name="customer.address"
-              id="address"
-              label="آدرس"
-            />
-          </Grid>
+          <CustomerFields control={control} setValue={setValue} />
           <Grid item xs={12}>
             <Input
               control={control}
