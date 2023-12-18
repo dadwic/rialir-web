@@ -23,20 +23,20 @@ export default function Waybill({ onEdit }) {
     <Box>
       <Box display="flex" justifyContent="space-between" onClick={onEdit}>
         <div>
-          <img src="/logo-2x-000.png" width={128} />
+          <img src="/logo-2x-000.png" width={128} style={{ marginTop: 8 }} />
           <Typography
             variant="body2"
             textAlign="center"
-            fontFamily="IRANYekan"
-            fontWeight={700}
+            fontFamily="Vazirmatn"
+            fontWeight={400}
           >
             ریالیر | خرید از ترکیه
           </Typography>
           <Typography
             variant="body2"
             textAlign="center"
+            fontWeight="bold"
             fontFamily="monospace"
-            fontWeight={700}
           >
             www.rialir.com
           </Typography>
@@ -53,9 +53,8 @@ export default function Waybill({ onEdit }) {
             sx={{
               tr: {
                 td: {
-                  fontFamily: 'IRANYekan',
                   borderColor: '#000',
-                  fontWeight: 700,
+                  fontWeight: 400,
                   borderWidth: 2,
                 },
               },
@@ -63,13 +62,13 @@ export default function Waybill({ onEdit }) {
           >
             <TableRow>
               <TableCell>تاریخ:</TableCell>
-              <TableCell>
+              <TableCell sx={{ pl: 0 }}>
                 {moment().zone('+0330').format('dddd jD jMMMM jYYYY - HH:mm')}
               </TableCell>
             </TableRow>
             <TableRow>
               <TableCell>گیرنده:</TableCell>
-              <TableCell>
+              <TableCell sx={{ pl: 0 }}>
                 {customer.firstName} {customer.lastName}
               </TableCell>
             </TableRow>
@@ -79,7 +78,9 @@ export default function Waybill({ onEdit }) {
               }}
             >
               <TableCell>آدرس:</TableCell>
-              <TableCell>{persianNumber(customer.address)}</TableCell>
+              <TableCell sx={{ pl: 0 }}>
+                {persianNumber(customer.address)}
+              </TableCell>
             </TableRow>
           </TableBody>
         </Table>
