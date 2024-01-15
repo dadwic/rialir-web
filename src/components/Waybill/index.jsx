@@ -24,12 +24,7 @@ export default function Waybill({ onEdit }) {
       <Box display="flex" justifyContent="space-between" onClick={onEdit}>
         <div>
           <img src="/logo-2x-000.png" width={128} style={{ marginTop: 8 }} />
-          <Typography
-            variant="body2"
-            textAlign="center"
-            fontFamily="Vazirmatn"
-            fontWeight={400}
-          >
+          <Typography variant="body2" textAlign="center" fontWeight={400}>
             ریالیر | خرید از ترکیه
           </Typography>
           <Typography
@@ -85,6 +80,12 @@ export default function Waybill({ onEdit }) {
           </TableBody>
         </Table>
       </TableContainer>
+      <Typography mt={1} textAlign="center">
+        مشتری عزیز، قدردان اعتماد شما هستیم. ❤
+      </Typography>
+      <Typography variant="subtitle2" fontSize={13} mt={1} textAlign="center">
+        از سفارشتان کنار بگ ریالیر عکس بگیرید و کد تخفیف دریافت کنید!
+      </Typography>
       <center>
         <Barcode value={waybill.barcode} height={32} />
       </center>
