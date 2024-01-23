@@ -134,7 +134,7 @@ export default function ShippingForm() {
               size="large"
               variant="outlined"
               startIcon={<AddIcon />}
-              onClick={() => append({ name: '', weight: '', shoe: false })}
+              onClick={() => append({ name: '', weight: '1', shoe: true })}
             >
               محصول جدید
             </Button>
@@ -181,8 +181,8 @@ export default function ShippingForm() {
                       <IconButton
                         edge="end"
                         color="error"
-                        disabled={index === 0}
                         onClick={() => remove(index)}
+                        disabled={index === 0 && fields.length === 1}
                       >
                         <CloseIcon />
                       </IconButton>

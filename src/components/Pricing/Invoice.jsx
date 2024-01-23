@@ -53,7 +53,7 @@ export default function PricingInvoice({ onEdit }) {
             <TableRow>
               <TableCell align="center">قیمت لحظه ای لیر</TableCell>
               <TableCell align="center">کارمزد خرید</TableCell>
-              <TableCell align="center">قیمت نهایی</TableCell>
+              <TableCell align="center">قابل پرداخت</TableCell>
             </TableRow>
           </TableHead>
           <TableBody
@@ -152,7 +152,7 @@ export default function PricingInvoice({ onEdit }) {
       </Typography>
       <ul style={{ paddingInlineStart: '1em' }}>
         <Typography component="li" fontWeight={700} gutterBottom>
-          با ثبت سفارش، با شرایط و قوانین سایت موافقت می کنید.
+          با ثبت سفارش، با شرایط و قوانین سایت موافقت می‌کنید.
         </Typography>
         <Typography component="li" fontWeight={700} gutterBottom>
           در علت تراکنش ذکر شود: بابت پرداخت قرض و تادیه دیون

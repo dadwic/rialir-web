@@ -135,7 +135,7 @@ export default function ShippingInvoice({ onEdit }) {
           color="primary"
           gutterBottom
         >
-          مبلغ نهایی (قابل پرداخت):{' '}
+          مبلغ نهایی قابل پرداخت:&nbsp;
           {ccyFormat(shipping.invoiceTotal + pricing.invoiceTotal)} ریال
         </Typography>
       ) : (
@@ -145,7 +145,7 @@ export default function ShippingInvoice({ onEdit }) {
       )}
       <ul style={{ paddingInlineStart: '1em' }}>
         <Typography component="li" fontWeight={700} gutterBottom>
-          با ثبت سفارش، با شرایط و قوانین سایت موافقت می کنید.
+          با ثبت سفارش، با شرایط و قوانین سایت موافقت می‌کنید.
         </Typography>
         <Typography component="li" fontWeight={700} gutterBottom>
           در علت تراکنش ذکر شود: بابت پرداخت قرض و تادیه دیون
