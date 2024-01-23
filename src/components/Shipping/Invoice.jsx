@@ -130,7 +130,7 @@ export default function ShippingInvoice({ onEdit }) {
       <Divider sx={{ mb: 2 }} />
       {pricing.invoiceTotal ? (
         <Typography
-          fontWeight={700}
+          fontWeight={900}
           align="center"
           color="primary"
           gutterBottom
