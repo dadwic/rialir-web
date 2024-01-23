@@ -53,7 +53,15 @@ export default function ShippingForm() {
     name: 'products',
   });
 
-  const onSubmit = ({ customer, ...data }) => {
+  const onSubmit = ({ customer, ...form }) => {
+    const subtotal =
+      form.products.reduce((acc, obj) => {
+        if (obj.shoe) return acc + parseInt(obj.weight) * 1000;
+        return acc + parseInt(obj.weight);
+      }, 0) * parseInt(form.rate);
+    const invoiceTotal =
+      (form.tipax ? subtotal : subtotal + parseInt(form.courier)) * 10;
+    const data = { ...form, subtotal, invoiceTotal };
     dispatch({ type: 'set_shipping', customer, data });
     setEditMode(false);
   };

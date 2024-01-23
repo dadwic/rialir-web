@@ -11,7 +11,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { numFormat, persianNumber } from '../../utils';
+import { ccyFormat, numFormat, persianNumber } from '../../utils';
 import { AppContext } from '../../context';
 import Logo from '../../Logo';
 import URL from '../../URL';
@@ -19,15 +19,7 @@ import URL from '../../URL';
 moment.loadPersian({ usePersianDigits: true, dialect: 'persian-modern' });
 
 export default function ShippingInvoice({ onEdit }) {
-  const { customer, shipping } = useContext(AppContext);
-  const subtotal =
-    shipping.products.reduce((acc, obj) => {
-      if (obj.shoe) return acc + parseInt(obj.weight) * 1000;
-      return acc + parseInt(obj.weight);
-    }, 0) * parseInt(shipping.rate);
-  const invoiceTotal = shipping.tipax
-    ? subtotal
-    : subtotal + parseInt(shipping.courier);
+  const { customer, shipping, pricing } = useContext(AppContext);
 
   return (
     <Box mt={2}>
@@ -48,7 +40,7 @@ export default function ShippingInvoice({ onEdit }) {
         sx={{ mt: 2 }}
         gutterBottom
       >
-        صورتحساب هزینه باربری
+        صورتحساب هزینه ارسال
       </Typography>
       <Typography variant="subtitle2" textAlign="center" color="text.secondary">
         {moment().zone('+0330').format('dddd jD jMMMM jYYYY - HH:mm')}
@@ -83,7 +75,7 @@ export default function ShippingInvoice({ onEdit }) {
             <TableRow>
               <TableCell colSpan={3}>
                 <Typography variant="subtitle2">
-                  مجموع: {numFormat(invoiceTotal * 10)} ریال
+                  مجموع هزینه ارسال: {numFormat(shipping.invoiceTotal)} ریال
                 </Typography>
               </TableCell>
             </TableRow>
@@ -136,9 +128,21 @@ export default function ShippingInvoice({ onEdit }) {
         </Grid>
       </Grid>
       <Divider sx={{ mb: 2 }} />
-      <Typography fontWeight={700} gutterBottom>
-        توضیحات: {persianNumber(shipping.description)}
-      </Typography>
+      {pricing.invoiceTotal ? (
+        <Typography
+          fontWeight={700}
+          align="center"
+          color="primary"
+          gutterBottom
+        >
+          مبلغ نهایی (قابل پرداخت):{' '}
+          {ccyFormat(shipping.invoiceTotal + pricing.invoiceTotal)} ریال
+        </Typography>
+      ) : (
+        <Typography fontWeight={700} gutterBottom>
+          توضیحات: {persianNumber(shipping.description)}
+        </Typography>
+      )}
       <ul style={{ paddingInlineStart: '1em' }}>
         <Typography component="li" fontWeight={700} gutterBottom>
           با ثبت سفارش، با شرایط و قوانین سایت موافقت می کنید.

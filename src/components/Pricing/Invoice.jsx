@@ -91,7 +91,7 @@ export default function PricingInvoice({ onEdit }) {
             <TableRow>
               <TableCell colSpan={incDsc ? 2 : 3}>
                 <Typography variant="subtitle2">
-                  قیمت محصولات: {tryFormat(pricing.subtotal)} لیر
+                  قیمت کالاها: {tryFormat(pricing.subtotal)} لیر
                 </Typography>
               </TableCell>
               {incDsc && (

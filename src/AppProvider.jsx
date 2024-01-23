@@ -23,6 +23,8 @@ export default function AppProvider({ children }) {
     shipping: {
       rate: '350',
       courier: '20000',
+      subtotal: '',
+      invoiceTotal: '',
       products: [{ name: '', weight: '', shoe: false }],
       description: '',
       tipax: true,
