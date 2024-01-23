@@ -19,8 +19,8 @@ export default function AppProvider({ children }) {
       date: null,
     },
     shipping: {
-      rate: '250',
-      courier: '25000',
+      rate: '350',
+      courier: '20000',
       products: [{ name: '', weight: '', shoe: false }],
       description: '',
       tipax: true,
