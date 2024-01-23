@@ -90,7 +90,7 @@ export default function PricingInvoice({ onEdit }) {
               </TableCell>
               <TableCell align="center">
                 <Typography variant="subtitle2" fontWeight={700}>
-                  {numFormat(invoiceTotal)} تومان
+                  {numFormat(invoiceTotal * 10)} ریال
                 </Typography>
               </TableCell>
             </TableRow>

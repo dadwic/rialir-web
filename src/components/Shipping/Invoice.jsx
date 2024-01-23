@@ -83,7 +83,7 @@ export default function ShippingInvoice({ onEdit }) {
             <TableRow>
               <TableCell colSpan={3}>
                 <Typography variant="subtitle2">
-                  مجموع: {numFormat(invoiceTotal)} تومان
+                  مجموع: {numFormat(invoiceTotal * 10)} ریال
                 </Typography>
               </TableCell>
             </TableRow>
