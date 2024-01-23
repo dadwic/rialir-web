@@ -21,13 +21,7 @@ moment.loadPersian({ usePersianDigits: true, dialect: 'persian-modern' });
 export default function PricingInvoice({ onEdit }) {
   const { customer, pricing } = useContext(AppContext);
   const incDsc = pricing.discount;
-  const subtotal = parseFloat(pricing.subtotal);
   const fee = parseInt(pricing.fee);
-  const rate = parseInt(pricing.try) + fee;
-  const dsc = fee * subtotal * 0.25;
-  const discount = dsc > 50000 ? 50000 : dsc;
-  let invoiceTotal = rate * subtotal;
-  if (incDsc) invoiceTotal -= discount;
 
   return (
     <Box mt={2}>
@@ -90,7 +84,7 @@ export default function PricingInvoice({ onEdit }) {
               </TableCell>
               <TableCell align="center">
                 <Typography variant="subtitle2" fontWeight={700}>
-                  {numFormat(invoiceTotal * 10)} ریال
+                  {numFormat(pricing.invoiceTotal)} ریال
                 </Typography>
               </TableCell>
             </TableRow>
@@ -103,7 +97,7 @@ export default function PricingInvoice({ onEdit }) {
               {incDsc && (
                 <TableCell sx={{ borderLeft: '1px solid #e0e0e0', px: 1 }}>
                   <Typography variant="subtitle2">
-                    تخفیف: {numFormat(discount)} تومان
+                    تخفیف: {numFormat(pricing.discountVal)} تومان
                   </Typography>
                 </TableCell>
               )}

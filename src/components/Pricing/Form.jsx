@@ -43,7 +43,16 @@ export default function PricingForm() {
   });
   const { subtotal, discount, decimal } = watch();
 
-  const onSubmit = ({ customer, ...data }) => {
+  const onSubmit = ({ customer, ...form }) => {
+    const subtotal = parseFloat(form.subtotal);
+    const fee = parseInt(form.fee);
+    const rate = parseInt(form.try) + fee;
+    const dsc = fee * subtotal * 0.25;
+    const discountVal = dsc > 50000 ? 50000 : dsc;
+    // Convert toman to rial
+    let invoiceTotal = rate * subtotal * 10;
+    if (form.discount) invoiceTotal -= discountVal * 10;
+    const data = { ...form, invoiceTotal, discountVal };
     dispatch({ type: 'set_pricing', customer, data });
     setEditMode(false);
   };
