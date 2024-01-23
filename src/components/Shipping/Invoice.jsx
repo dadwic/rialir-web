@@ -141,6 +141,9 @@ export default function ShippingInvoice({ onEdit }) {
       </Typography>
       <ul style={{ paddingInlineStart: '1em' }}>
         <Typography component="li" fontWeight={700} gutterBottom>
+          با ثبت سفارش، با شرایط و قوانین سایت موافقت می کنید.
+        </Typography>
+        <Typography component="li" fontWeight={700} gutterBottom>
           در علت تراکنش ذکر شود: بابت پرداخت قرض و تادیه دیون
         </Typography>
         <Typography component="li" align="justify" fontWeight={700}>

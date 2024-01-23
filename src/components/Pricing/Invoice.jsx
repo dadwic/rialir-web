@@ -158,6 +158,9 @@ export default function PricingInvoice({ onEdit }) {
       </Typography>
       <ul style={{ paddingInlineStart: '1em' }}>
         <Typography component="li" fontWeight={700} gutterBottom>
+          با ثبت سفارش، با شرایط و قوانین سایت موافقت می کنید.
+        </Typography>
+        <Typography component="li" fontWeight={700} gutterBottom>
           در علت تراکنش ذکر شود: بابت پرداخت قرض و تادیه دیون
         </Typography>
         <Typography
@@ -170,7 +173,7 @@ export default function PricingInvoice({ onEdit }) {
           ریالیر ارسال کنید.
         </Typography>
         <Typography component="li" align="justify" fontWeight={700}>
-          مدت زمان تحویل سفارش: ۲۰ تا ۳۰ روز کاری بعد از تحویل کالا توسط فروشنده
+          مدت زمان تحویل سفارش: ۴ تا ۶ هفته کاری بعد از تحویل کالا توسط فروشنده
           به دفتر ریالیر در استانبول
         </Typography>
       </ul>
