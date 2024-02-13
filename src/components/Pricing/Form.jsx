@@ -14,9 +14,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import PricingIcon from '@mui/icons-material/CurrencyLira';
 import { AppContext, AppDispatchContext } from '../../context';
 import CustomerFields from '../Form/CustomerFields';
-import Copyright from '../../Copyright';
 import Checkbox from '../Form/Checkbox';
 import Input from '../Form/Input';
+import Copyright from '../Copyright';
 import Invoice from './Invoice';
 
 const schema = yup

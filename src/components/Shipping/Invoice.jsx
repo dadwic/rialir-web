@@ -13,8 +13,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { ccyFormat, numFormat, persianNumber } from '../../utils';
 import { AppContext } from '../../context';
-import Logo from '../../Logo';
-import URL from '../../URL';
+import Logo from '../Logo';
+import URL from '../URL';
 
 moment.loadPersian({ usePersianDigits: true, dialect: 'persian-modern' });
 

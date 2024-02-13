@@ -22,7 +22,9 @@ export default function AppProvider({ children }) {
     },
     shipping: {
       rate: '350',
-      courier: '20000',
+      shoeRate: '300',
+      cosmeticRate: '400',
+      courier: '25000',
       subtotal: '',
       invoiceTotal: '',
       products: [{ name: '', weight: '', shoe: false }],

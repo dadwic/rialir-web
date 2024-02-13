@@ -11,8 +11,8 @@ import Typography from '@mui/material/Typography';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import { AppContext, AppDispatchContext } from '../../context';
 import CustomerFields from '../Form/CustomerFields';
-import Copyright from '../../Copyright';
 import Input from '../Form/Input';
+import Copyright from '../Copyright';
 import Waybill from './';
 
 const schema = yup

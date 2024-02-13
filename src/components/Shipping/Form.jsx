@@ -15,10 +15,10 @@ import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import ShippingIcon from '@mui/icons-material/LocalShipping';
 import { AppContext, AppDispatchContext } from '../../context';
-import Copyright from '../../Copyright';
 import CustomerFields from '../Form/CustomerFields';
 import Checkbox from '../Form/Checkbox';
 import Input from '../Form/Input';
+import Copyright from '../Copyright';
 import Invoice from './Invoice';
 
 const schema = yup
@@ -30,6 +30,8 @@ const schema = yup
       address: yup.string().required('آدرس الزامی است.'),
     }),
     rate: yup.string().required('نرخ باربری الزامی است.'),
+    shoeRate: yup.string().required('نره باربری کفش الزامی است.'),
+    cosmeticRate: yup.string().required('نرخ باربری آرایشی الزامی است.'),
     products: yup.array().of(
       yup.object().shape({
         name: yup.string().required('نام الزامی است.'),
@@ -47,18 +49,19 @@ export default function ShippingForm() {
     resolver: yupResolver(schema),
     defaultValues: { customer, ...shipping },
   });
-  const { tipax, products } = watch();
+  const { tipax, products, shoeRate } = watch();
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'products',
   });
 
   const onSubmit = ({ customer, ...form }) => {
-    const subtotal =
-      form.products.reduce((acc, obj) => {
-        if (obj.shoe) return acc + parseInt(obj.weight) * 1000;
-        return acc + parseInt(obj.weight);
-      }, 0) * parseInt(form.rate);
+    const subtotal = form.products.reduce((acc, obj) => {
+      if (obj.shoe) {
+        return acc + parseInt(obj.weight) * shoeRate * 1000;
+      }
+      return acc + parseInt(obj.weight) * parseInt(form.rate);
+    }, 0);
     const invoiceTotal =
       (form.tipax ? subtotal : subtotal + parseInt(form.courier)) * 10;
     const data = { ...form, subtotal, invoiceTotal };
@@ -102,6 +105,24 @@ export default function ShippingForm() {
           </Grid>
           <Grid item xs={6}>
             <Input
+              control={control}
+              label="نرخ باربری کفش (تومان)"
+              type="tel"
+              name="shoeRate"
+              id="shoeRate"
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Input
+              control={control}
+              label="نرخ باربری آرایشی (تومان)"
+              type="tel"
+              name="cosmeticRate"
+              id="cosmeticRate"
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <Input
               disabled={tipax}
               control={control}
               type="tel"
@@ -134,7 +155,7 @@ export default function ShippingForm() {
               size="large"
               variant="outlined"
               startIcon={<AddIcon />}
-              onClick={() => append({ name: '', weight: '1', shoe: true })}
+              onClick={() => append({ name: '', weight: '', shoe: false })}
             >
               محصول جدید
             </Button>
