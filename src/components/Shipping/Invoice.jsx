@@ -68,7 +68,7 @@ export default function ShippingInvoice({ onEdit }) {
                   {product.name}
                 </TableCell>
                 <TableCell align="right">
-                  {numFormat(product.weight)} {product.shoe ? 'جفت' : 'گرم'}
+                  {numFormat(product.weight)} {product.shoe ? 'عدد' : 'گرم'}
                 </TableCell>
               </TableRow>
             ))}

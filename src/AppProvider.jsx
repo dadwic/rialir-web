@@ -21,8 +21,8 @@ export default function AppProvider({ children }) {
       date: null,
     },
     shipping: {
-      rate: '350',
-      shoeRate: '300',
+      rate: '400',
+      shoeRate: '350',
       cosmeticRate: '400',
       courier: '25000',
       subtotal: '',
