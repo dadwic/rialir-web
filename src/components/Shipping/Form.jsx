@@ -30,7 +30,7 @@ const schema = yup
       address: yup.string().required('آدرس الزامی است.'),
     }),
     rate: yup.string().required('نرخ باربری الزامی است.'),
-    shoeRate: yup.string().required('نره باربری کفش الزامی است.'),
+    unitRate: yup.string().required('نره باربری کفش الزامی است.'),
     cosmeticRate: yup.string().required('نرخ باربری آرایشی الزامی است.'),
     products: yup.array().of(
       yup.object().shape({
@@ -49,7 +49,7 @@ export default function ShippingForm() {
     resolver: yupResolver(schema),
     defaultValues: { customer, ...shipping },
   });
-  const { tipax, products, shoeRate } = watch();
+  const { tipax, products, unitRate } = watch();
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'products',
@@ -57,8 +57,8 @@ export default function ShippingForm() {
 
   const onSubmit = ({ customer, ...form }) => {
     const subtotal = form.products.reduce((acc, obj) => {
-      if (obj.shoe) {
-        return acc + parseInt(obj.weight) * shoeRate * 1000;
+      if (obj.unit) {
+        return acc + parseInt(obj.weight) * unitRate * 1000;
       }
       return acc + parseInt(obj.weight) * parseInt(form.rate);
     }, 0);
@@ -108,8 +108,8 @@ export default function ShippingForm() {
               control={control}
               label="نرخ باربری کفش (تومان)"
               type="tel"
-              name="shoeRate"
-              id="shoeRate"
+              name="unitRate"
+              id="unitRate"
             />
           </Grid>
           <Grid item xs={6}>
@@ -155,7 +155,7 @@ export default function ShippingForm() {
               size="large"
               variant="outlined"
               startIcon={<AddIcon />}
-              onClick={() => append({ name: '', weight: '', shoe: false })}
+              onClick={() => append({ name: '', weight: '', unit: false })}
             >
               محصول جدید
             </Button>
@@ -167,22 +167,22 @@ export default function ShippingForm() {
                   key={field.id}
                   id={field.id}
                   control={control}
-                  name={`products.${index}.name`}
                   label="نام محصول"
+                  name={`products.${index}.name`}
                   InputProps={{
                     endAdornment: (
-                      <InputAdornment position="end" sx={{ mr: -1.5 }}>
-                        <Tooltip title="کفش">
+                      <Tooltip title="تعداد محصول (کفش، روتختی، ...)">
+                        <InputAdornment position="end" sx={{ mr: -1.5 }}>
                           <Checkbox
                             edge="end"
                             color="primary"
-                            id={`shoe-${index}`}
-                            defaultChecked={products[index].shoe}
-                            name={`products.${index}.shoe`}
+                            id={`unit-${index}`}
+                            defaultChecked={products[index].unit}
+                            name={`products.${index}.unit`}
                             control={control}
                           />
-                        </Tooltip>
-                      </InputAdornment>
+                        </InputAdornment>
+                      </Tooltip>
                     ),
                   }}
                 />
@@ -194,7 +194,7 @@ export default function ShippingForm() {
                   control={control}
                   name={`products.${index}.weight`}
                   label={
-                    products[index].shoe ? 'تعداد جفت کفش' : 'وزن محصول (گرم)'
+                    products[index].unit ? 'تعداد محصول' : 'وزن محصول (گرم)'
                   }
                   type="tel"
                   InputProps={{
