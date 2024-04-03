@@ -14,6 +14,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import PricingIcon from '@mui/icons-material/CurrencyLira';
 import { AppContext, AppDispatchContext } from '../../context';
 import CustomerFields from '../Form/CustomerFields';
+import NumericFormat from '../Form/NumericFormat';
 import Checkbox from '../Form/Checkbox';
 import Input from '../Form/Input';
 import Copyright from '../Copyright';
@@ -56,16 +57,6 @@ export default function PricingForm() {
     dispatch({ type: 'set_pricing', customer, data });
     setEditMode(false);
   };
-
-  useEffect(() => {
-    fetch('https://www.rialir.com/wp-json/wp/v2/pricing')
-      .then((res) => res.json())
-      .then((data) => {
-        setValue('try', data?.try);
-        setValue('fee', data?.fee);
-        setValue('date', data?.date);
-      });
-  }, []);
 
   if (!editMode) return <Invoice onEdit={() => setEditMode(true)} />;
 
@@ -113,7 +104,7 @@ export default function PricingForm() {
                   <IconButton
                     edge="end"
                     title="همکار"
-                    onClick={() => setValue('fee', '100')}
+                    onClick={() => setValue('fee', '200')}
                   >
                     <MoneyIcon />
                   </IconButton>
@@ -121,14 +112,14 @@ export default function PricingForm() {
               }}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12}>
             <Input
               control={control}
-              type="tel"
               id="subtotal"
               name="subtotal"
               label="قیمت محصولات (₺)"
               InputProps={{
+                inputComponent: NumericFormat,
                 endAdornment: (
                   <IconButton
                     edge="end"
@@ -136,31 +127,6 @@ export default function PricingForm() {
                     onClick={() => setValue('subtotal', '')}
                   >
                     <CloseIcon />
-                  </IconButton>
-                ),
-              }}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <Input
-              type="tel"
-              id="decimal"
-              name="decimal"
-              label="کروش (kr)"
-              control={control}
-              inputProps={{ maxLength: 5 }}
-              InputProps={{
-                endAdornment: (
-                  <IconButton
-                    edge="end"
-                    title="Set decimal"
-                    disabled={!decimal}
-                    onClick={() => {
-                      setValue('subtotal', `${subtotal}.${decimal}`);
-                      setValue('decimal', '');
-                    }}
-                  >
-                    <MoneyIcon />
                   </IconButton>
                 ),
               }}

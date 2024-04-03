@@ -111,8 +111,9 @@ export default function PricingInvoice({ onEdit }) {
                 <Typography variant="subtitle2" color="text.secondary">
                   تاریخ بروزرسانی‌ قیمت لیر:&nbsp;
                   {moment(pricing.date || new Date().getTime())
+                    .subtract(30, 'minutes')
                     .zone('+0330')
-                    .format('jYYYY/jMM/jDD - HH:mm:ss')}
+                    .format('jYYYY/jMM/jDD - HH:mm')}
                 </Typography>
               </TableCell>
             </TableRow>

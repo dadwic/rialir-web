@@ -11,9 +11,8 @@ export default function AppProvider({ children }) {
     },
     pricing: {
       try: '0',
-      fee: '200',
+      fee: '350',
       subtotal: '',
-      decimal: '',
       invoiceTotal: '',
       description: '',
       discountVal: '',
