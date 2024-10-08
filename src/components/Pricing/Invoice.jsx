@@ -168,7 +168,7 @@ export default function PricingInvoice({ onEdit }) {
           ریالیر ارسال کنید.
         </Typography>
         <Typography component="li" align="justify" fontWeight={700}>
-          مدت زمان تحویل سفارش: ۲۰ تا ۳۰ روز کاری ترکیه بعد از تحویل کالا توسط
+          مدت زمان تحویل سفارش: ۲ تا ۳ هفته کاری ترکیه بعد از تحویل کالا توسط
           فروشنده به دفتر ریالیر در استانبول
         </Typography>
       </ul>

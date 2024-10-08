@@ -11,7 +11,7 @@ export default function AppProvider({ children }) {
     },
     pricing: {
       try: '0',
-      fee: '350',
+      fee: '300',
       subtotal: '',
       invoiceTotal: '',
       description: '',
@@ -20,10 +20,10 @@ export default function AppProvider({ children }) {
       date: null,
     },
     shipping: {
-      rate: '400',
+      rate: '450',
       unitRate: '350',
-      cosmeticRate: '400',
-      courier: '25000',
+      cosmeticRate: '450',
+      courier: '30000',
       subtotal: '',
       invoiceTotal: '',
       products: [{ name: '', weight: '', unit: false }],
