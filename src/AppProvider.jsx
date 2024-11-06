@@ -17,6 +17,7 @@ export default function AppProvider({ children }) {
       description: '',
       discountVal: '',
       discount: false,
+      firstOrder: false,
       date: null,
     },
     shipping: {

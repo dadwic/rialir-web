@@ -42,7 +42,7 @@ export default function PricingForm() {
     resolver: yupResolver(schema),
     defaultValues: { customer, ...pricing },
   });
-  const { subtotal, discount, decimal } = watch();
+  const { discount, firstOrder } = watch();
 
   const onSubmit = ({ customer, ...form }) => {
     const subtotal = parseFloat(form.subtotal);
@@ -141,6 +141,14 @@ export default function PricingForm() {
             />
           </Grid>
           <Grid item xs={12}>
+            <Checkbox
+              id="firstOrder"
+              name="firstOrder"
+              color="primary"
+              control={control}
+              defaultChecked={firstOrder}
+              label="سفارش اول بدون کارمزد (تا سقف ۱۰۰۰ لیر)"
+            />
             <Checkbox
               id="discount"
               name="discount"
