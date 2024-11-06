@@ -49,7 +49,7 @@ export default function PricingInvoice({ onEdit }) {
         <Table size="small">
           <TableHead>
             <TableRow>
-              <TableCell align="center">قیمت لحظه‌ای لیر</TableCell>
+              <TableCell align="center">قیمت لیر</TableCell>
               <TableCell align="center">کارمزد هر لیر</TableCell>
               <TableCell align="center">قابل پرداخت</TableCell>
             </TableRow>
