@@ -52,12 +52,7 @@ export default function PricingForm() {
     // Convert toman to rial
     let invoiceTotal = rate * subtotal * 10;
     if (form.discount) invoiceTotal -= form.discountVal * 10;
-    if (firstOrder) {
-      if (subtotal > 1000) {
-        // Default fee is 300
-        invoiceTotal += (subtotal - 1000) * (lir + 250);
-      }
-    }
+    if (firstOrder && subtotal > 1000) invoiceTotal -= 2500000; // Max discount is 250K-IRT
     const data = { ...form, invoiceTotal };
     dispatch({ type: 'set_pricing', customer, data });
     setEditMode(false);
