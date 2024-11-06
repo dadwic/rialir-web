@@ -99,7 +99,7 @@ export default function PricingInvoice({ onEdit }) {
               {discount && (
                 <TableCell sx={{ borderLeft: '1px solid #e0e0e0', px: 1 }}>
                   <Typography variant="subtitle2">
-                    تخفیف: {numFormat(pricing.discountVal)} تومان
+                    تخفیف: {numFormat(parseInt(pricing.discountVal) * 10)} ریال
                   </Typography>
                 </TableCell>
               )}
