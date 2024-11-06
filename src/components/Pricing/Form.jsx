@@ -115,6 +115,7 @@ export default function PricingForm() {
           <Grid item xs={12}>
             <Input
               control={control}
+              type="tel"
               id="subtotal"
               name="subtotal"
               label="قیمت محصولات (₺)"
