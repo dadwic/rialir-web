@@ -76,9 +76,13 @@ export default function PricingInvoice({ onEdit }) {
                 align="center"
                 sx={{ borderRight: '1px solid #e0e0e0' }}
               >
-                <Typography variant="subtitle2">
-                  {persianNumber(fee)} تومان
-                </Typography>
+                {firstOrder ? (
+                  <Typography variant="subtitle2">بدون کارمزد</Typography>
+                ) : (
+                  <Typography variant="subtitle2">
+                    {persianNumber(fee)} تومان
+                  </Typography>
+                )}
               </TableCell>
               <TableCell align="center">
                 <Typography variant="subtitle2" fontWeight={700}>
@@ -87,7 +91,7 @@ export default function PricingInvoice({ onEdit }) {
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell colSpan={firstOrder || discount ? 2 : 3}>
+              <TableCell colSpan={discount ? 2 : 3}>
                 <Typography variant="subtitle2">
                   قیمت کالاها: {tryFormat(pricing.subtotal)} لیر
                 </Typography>
@@ -96,13 +100,6 @@ export default function PricingInvoice({ onEdit }) {
                 <TableCell sx={{ borderLeft: '1px solid #e0e0e0', px: 1 }}>
                   <Typography variant="subtitle2">
                     تخفیف: {numFormat(pricing.discountVal)} تومان
-                  </Typography>
-                </TableCell>
-              )}
-              {firstOrder && (
-                <TableCell sx={{ borderLeft: '1px solid #e0e0e0', px: 1 }}>
-                  <Typography variant="subtitle2" align="center">
-                    سفارش اول بدون کارمزد
                   </Typography>
                 </TableCell>
               )}

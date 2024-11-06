@@ -173,7 +173,6 @@ export default function PricingForm() {
               control={control}
               defaultChecked={firstOrder}
               label="سفارش اول بدون کارمزد (تا سقف ۱۰۰۰ لیر)"
-              onClick={() => setValue('fee', '50')}
             />
           </Grid>
         </Grid>
