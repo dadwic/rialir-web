@@ -47,13 +47,18 @@ export default function PricingForm() {
   const onSubmit = ({ customer, ...form }) => {
     const subtotal = parseFloat(form.subtotal);
     const fee = parseInt(form.fee);
-    const rate = parseInt(form.try) + fee;
-    const dsc = fee * subtotal * 0.25;
-    const discountVal = dsc > 50000 ? 50000 : dsc;
+    const lir = parseInt(form.try);
+    const rate = lir + fee;
     // Convert toman to rial
     let invoiceTotal = rate * subtotal * 10;
-    if (form.discount) invoiceTotal -= discountVal * 10;
-    const data = { ...form, invoiceTotal, discountVal };
+    if (form.discount) invoiceTotal -= form.discountVal * 10;
+    if (firstOrder) {
+      if (subtotal > 1000) {
+        // Default fee is 300
+        invoiceTotal += (subtotal - 1000) * (lir + 250);
+      }
+    }
+    const data = { ...form, invoiceTotal };
     dispatch({ type: 'set_pricing', customer, data });
     setEditMode(false);
   };
@@ -140,6 +145,26 @@ export default function PricingForm() {
               label="توضیحات"
             />
           </Grid>
+          <Grid item xs={3}>
+            <Checkbox
+              id="discount"
+              name="discount"
+              color="primary"
+              control={control}
+              defaultChecked={discount}
+              label="تخفیف"
+            />
+          </Grid>
+          <Grid item xs={9}>
+            <Input
+              control={control}
+              type="tel"
+              id="discountVal"
+              name="discountVal"
+              label="تخفیف (تومان)"
+              disabled={!discount}
+            />
+          </Grid>
           <Grid item xs={12}>
             <Checkbox
               id="firstOrder"
@@ -148,14 +173,7 @@ export default function PricingForm() {
               control={control}
               defaultChecked={firstOrder}
               label="سفارش اول بدون کارمزد (تا سقف ۱۰۰۰ لیر)"
-            />
-            <Checkbox
-              id="discount"
-              name="discount"
-              color="primary"
-              control={control}
-              defaultChecked={discount}
-              label="تخفیف ۲۵٪ کارمزد خرید (حداکثر ۵۰ هزار تومان)"
+              onClick={() => setValue('fee', '50')}
             />
           </Grid>
         </Grid>

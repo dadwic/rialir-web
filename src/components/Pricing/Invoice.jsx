@@ -20,9 +20,7 @@ moment.loadPersian({ usePersianDigits: true, dialect: 'persian-modern' });
 
 export default function PricingInvoice({ onEdit }) {
   const { customer, pricing } = useContext(AppContext);
-  const incDsc = pricing.discount;
-  const fee = parseInt(pricing.fee);
-
+  const { firstOrder, discount, fee } = pricing;
   return (
     <Box mt={2}>
       <Box
@@ -51,8 +49,8 @@ export default function PricingInvoice({ onEdit }) {
         <Table size="small">
           <TableHead>
             <TableRow>
-              <TableCell align="center">قیمت لحظه ای لیر</TableCell>
-              <TableCell align="center">کارمزد خرید</TableCell>
+              <TableCell align="center">قیمت لحظه‌ای لیر</TableCell>
+              <TableCell align="center">کارمزد هر لیر</TableCell>
               <TableCell align="center">قابل پرداخت</TableCell>
             </TableRow>
           </TableHead>
@@ -79,7 +77,7 @@ export default function PricingInvoice({ onEdit }) {
                 sx={{ borderRight: '1px solid #e0e0e0' }}
               >
                 <Typography variant="subtitle2">
-                  {persianNumber(incDsc ? fee * 0.75 : fee)} تومان
+                  {persianNumber(fee)} تومان
                 </Typography>
               </TableCell>
               <TableCell align="center">
@@ -89,15 +87,22 @@ export default function PricingInvoice({ onEdit }) {
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell colSpan={incDsc ? 2 : 3}>
+              <TableCell colSpan={firstOrder || discount ? 2 : 3}>
                 <Typography variant="subtitle2">
                   قیمت کالاها: {tryFormat(pricing.subtotal)} لیر
                 </Typography>
               </TableCell>
-              {incDsc && (
+              {discount && (
                 <TableCell sx={{ borderLeft: '1px solid #e0e0e0', px: 1 }}>
                   <Typography variant="subtitle2">
                     تخفیف: {numFormat(pricing.discountVal)} تومان
+                  </Typography>
+                </TableCell>
+              )}
+              {firstOrder && (
+                <TableCell sx={{ borderLeft: '1px solid #e0e0e0', px: 1 }}>
+                  <Typography variant="subtitle2" align="center">
+                    سفارش اول بدون کارمزد
                   </Typography>
                 </TableCell>
               )}

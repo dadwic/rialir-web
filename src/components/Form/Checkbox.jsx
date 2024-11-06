@@ -11,6 +11,7 @@ export default function Checkbox({ control, name, label, ...props }) {
       render={({ field }) => (
         <FormControlLabel
           label={label}
+          sx={{ height: '100%' }}
           control={<MuiCheckbox {...field} {...props} />}
         />
       )}
