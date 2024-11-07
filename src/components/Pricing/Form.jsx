@@ -38,7 +38,7 @@ export default function PricingForm() {
   const { dispatch, resetApp } = useContext(AppDispatchContext);
   const { customer, pricing } = useContext(AppContext);
   const [editMode, setEditMode] = useState(true);
-  const { control, handleSubmit, setValue, watch, reset } = useForm({
+  const { control, handleSubmit, setValue, watch } = useForm({
     resolver: yupResolver(schema),
     defaultValues: { customer, ...pricing },
   });
@@ -61,7 +61,7 @@ export default function PricingForm() {
   const handleReset = () => {
     if (confirm('همه اطلاعات پاک خواهد شد، تایید می‌کنید؟')) {
       resetApp();
-      reset();
+      window.location.reload();
     }
   };
 
