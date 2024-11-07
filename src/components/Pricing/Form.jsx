@@ -35,7 +35,7 @@ const schema = yup
   .required();
 
 export default function PricingForm() {
-  const dispatch = useContext(AppDispatchContext);
+  const { dispatch, reset } = useContext(AppDispatchContext);
   const { customer, pricing } = useContext(AppContext);
   const [editMode, setEditMode] = useState(true);
   const { control, handleSubmit, setValue, watch } = useForm({
@@ -78,10 +78,10 @@ export default function PricingForm() {
       <Box
         component="form"
         onSubmit={handleSubmit(onSubmit)}
-        sx={{ mt: 3 }}
+        sx={{ mt: 2 }}
         noValidate
       >
-        <Grid container spacing={2}>
+        <Grid container spacing={2} my={2}>
           <CustomerFields control={control} setValue={setValue} />
           <Grid item xs={6}>
             <Input
@@ -171,16 +171,17 @@ export default function PricingForm() {
               label="سفارش اول بدون کارمزد (تا سقف ۱۰۰۰ لیر)"
             />
           </Grid>
+          <Grid item xs={9}>
+            <Button fullWidth type="submit" size="large" variant="contained">
+              محاسبه
+            </Button>
+          </Grid>
+          <Grid item xs={3}>
+            <Button fullWidth size="large" variant="outlined" onClick={reset}>
+              RESET
+            </Button>
+          </Grid>
         </Grid>
-        <Button
-          fullWidth
-          type="submit"
-          size="large"
-          variant="contained"
-          sx={{ my: 2 }}
-        >
-          محاسبه
-        </Button>
         <Button
           fullWidth
           LinkComponent={Link}

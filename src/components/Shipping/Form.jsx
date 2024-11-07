@@ -42,7 +42,7 @@ const schema = yup
   .required();
 
 export default function ShippingForm() {
-  const dispatch = useContext(AppDispatchContext);
+  const { dispatch } = useContext(AppDispatchContext);
   const { customer, shipping } = useContext(AppContext);
   const [editMode, setEditMode] = useState(true);
   const { control, handleSubmit, watch, setValue } = useForm({

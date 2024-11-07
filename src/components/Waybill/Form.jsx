@@ -28,7 +28,7 @@ const schema = yup
   .required();
 
 export default function WaybillForm() {
-  const dispatch = useContext(AppDispatchContext);
+  const { dispatch } = useContext(AppDispatchContext);
   const { customer, waybill } = useContext(AppContext);
   const [editMode, setEditMode] = useState(true);
   const { control, handleSubmit, setValue } = useForm({
