@@ -63,14 +63,14 @@ export default function AppProvider({ children }) {
   }, [store]);
 
   // Function to reset local storage and context state
-  const reset = () => {
+  const resetApp = () => {
     localStorage.removeItem(LOCAL_STORAGE_KEY); // Clear local storage
     dispatch({ type: 'reset' }); // Reset state to initial values
   };
 
   return (
     <AppContext.Provider value={store}>
-      <AppDispatchContext.Provider value={{ dispatch, reset }}>
+      <AppDispatchContext.Provider value={{ dispatch, resetApp }}>
         {children}
       </AppDispatchContext.Provider>
     </AppContext.Provider>

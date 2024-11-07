@@ -35,10 +35,10 @@ const schema = yup
   .required();
 
 export default function PricingForm() {
-  const { dispatch, reset } = useContext(AppDispatchContext);
+  const { dispatch, resetApp } = useContext(AppDispatchContext);
   const { customer, pricing } = useContext(AppContext);
   const [editMode, setEditMode] = useState(true);
-  const { control, handleSubmit, setValue, watch } = useForm({
+  const { control, handleSubmit, setValue, watch, reset } = useForm({
     resolver: yupResolver(schema),
     defaultValues: { customer, ...pricing },
   });
@@ -56,6 +56,13 @@ export default function PricingForm() {
     const data = { ...form, invoiceTotal: total * 10 };
     dispatch({ type: 'set_pricing', customer, data });
     setEditMode(false);
+  };
+
+  const handleReset = () => {
+    if (confirm('همه اطلاعات پاک خواهد شد، تایید می‌کنید؟')) {
+      resetApp();
+      reset();
+    }
   };
 
   if (!editMode) return <Invoice onEdit={() => setEditMode(true)} />;
@@ -177,7 +184,12 @@ export default function PricingForm() {
             </Button>
           </Grid>
           <Grid item xs={3}>
-            <Button fullWidth size="large" variant="outlined" onClick={reset}>
+            <Button
+              fullWidth
+              size="large"
+              variant="outlined"
+              onClick={handleReset}
+            >
               RESET
             </Button>
           </Grid>
