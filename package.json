@@ -1,23 +1,28 @@
 {
   "name": "rialir",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
-    "dev": "vite --host",
-    "build": "vite build",
-    "serve": "vite preview"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/react": "latest",
-    "@emotion/styled": "latest",
+    "@emotion/cache": "^11.13.1",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
     "@hookform/resolvers": "^2.9.11",
-    "@mui/icons-material": "^5.14.9",
-    "@mui/material": "latest",
+    "@mui/icons-material": "^6.1.6",
+    "@mui/material": "^6.1.6",
+    "@mui/material-nextjs": "^6.1.6",
+    "eslint-config-next": "^15.0.3",
     "moment-jalaali": "^0.10.0",
+    "next": "^15.0.3",
     "qrcode": "^1.5.3",
-    "react": "latest",
+    "react": "^18.3.1",
     "react-barcode": "^1.4.6",
-    "react-dom": "latest",
+    "react-dom": "^18.3.1",
     "react-hook-form": "^7.46.2",
     "react-number-format": "^5.3.4",
     "react-router-dom": "^6.16.0",
@@ -26,9 +31,6 @@
     "yup": "^0.27.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "latest",
-    "prettier": "3.0.3",
-    "vite": "latest",
-    "vite-plugin-pwa": "^0.16.5"
+    "prettier": "3.0.3"
   }
 }
