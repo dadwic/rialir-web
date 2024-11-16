@@ -115,12 +115,12 @@ export default function PricingInvoice({ onEdit }) {
                   {pricing.rateTime
                     ? moment(pricing.rateTime)
                         .zone('+0330')
-                        .format('jD jMMMM jYYYY [ساعت] H:mm')
+                        .format('jD jMMMM jYYYY [ساعت] HH:mm')
                     : moment(new Date().getTime())
                         .zone('+0330')
                         .subtract(moment().minute() % 30, 'minutes')
                         .startOf('minute')
-                        .format('jD jMMMM jYYYY [ساعت] H:mm')}
+                        .format('jD jMMMM jYYYY [ساعت] HH:mm')}
                 </Typography>
               </TableCell>
             </TableRow>

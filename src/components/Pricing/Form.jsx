@@ -100,7 +100,7 @@ export default function PricingForm({ rates, updateRate }) {
       <Typography variant="h5">محاسبه گر قیمت نهایی کالا</Typography>
       <Typography variant="subtitle1" color="textSecondary">
         به‌روزرسانی قیمت لیر:&nbsp;
-        {moment(rates?.updated_at).format('jD jMMMM jYYYY [ساعت] H:mm')}
+        {moment(rates?.updated_at).format('jD jMMMM jYYYY [ساعت] HH:mm')}
       </Typography>
       <Box
         component="form"
@@ -252,7 +252,7 @@ export default function PricingForm({ rates, updateRate }) {
           variant="outlined"
           href="https://www.rialir.com/lir/"
         >
-          قیمت لحظه ای لیر
+          قیمت لحظه‌ای لیر
         </Button>
       </Box>
       <Copyright />
