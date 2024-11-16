@@ -13,8 +13,8 @@ const initialState = {
     address: '',
   },
   pricing: {
-    rate: 0,
-    fee: 300,
+    rate: '0',
+    fee: '300',
     subtotal: '',
     invoiceTotal: '',
     description: '',

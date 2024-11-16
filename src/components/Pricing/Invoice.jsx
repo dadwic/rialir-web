@@ -111,7 +111,7 @@ export default function PricingInvoice({ onEdit }) {
             >
               <TableCell colSpan={3}>
                 <Typography variant="subtitle2" color="text.secondary">
-                  تاریخ بروزرسانی‌ قیمت لیر:&nbsp;
+                  تاریخ به‌روزرسانی قیمت لیر:&nbsp;
                   {pricing.rateTime
                     ? moment(pricing.rateTime)
                         .zone('+0330')

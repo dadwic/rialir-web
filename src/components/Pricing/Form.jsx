@@ -117,6 +117,7 @@ export default function PricingForm({ rates, updateRate }) {
               id="rate"
               name="rate"
               label="قیمت لیر (تومان)"
+              InputLabelProps={{ shrink: true }}
               InputProps={{
                 endAdornment: (
                   <IconButton
@@ -137,6 +138,7 @@ export default function PricingForm({ rates, updateRate }) {
               id="fee"
               name="fee"
               label="کارمزد (تومان)"
+              InputLabelProps={{ shrink: true }}
               InputProps={{
                 endAdornment: (
                   <IconButton
