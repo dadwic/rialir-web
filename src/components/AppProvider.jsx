@@ -1,5 +1,7 @@
+'use client';
+
 import React, { useReducer, useEffect } from 'react';
-import { AppContext, AppDispatchContext } from './context';
+import { AppContext, AppDispatchContext } from '@/context';
 
 const LOCAL_STORAGE_KEY = 'appState';
 
