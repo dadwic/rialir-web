@@ -1,8 +1,7 @@
 'use client';
 
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import useSWR from 'swr';
-import { AppDispatchContext } from '@/context';
 import PricingForm from '@/components/Pricing/Form';
 import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
@@ -13,8 +12,7 @@ const fetcher = (url) =>
     cache: 'no-store',
   }).then((r) => r.json());
 
-export default function Rates() {
-  const { dispatch } = useContext(AppDispatchContext);
+export default function Pricing() {
   const { data, error, isLoading, mutate } = useSWR('/api/rates', fetcher);
 
   if (error) {
@@ -27,7 +25,7 @@ export default function Rates() {
           </Button>
         }
       >
-        خطا در به‌روزرسانی قیمت لیر
+        خطا در بروزرسانی‌ قیمت لیر
       </Alert>
     );
   }
@@ -36,11 +34,5 @@ export default function Rates() {
     return <CircularProgress />;
   }
 
-  useEffect(() => {
-    if (data?.try_irt) {
-      dispatch({ type: 'set_rates', data });
-    }
-  }, [data]);
-
-  return <PricingForm updateRate={mutate} />;
+  return <PricingForm rates={data} updateRate={mutate} />;
 }

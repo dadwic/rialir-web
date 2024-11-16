@@ -6,14 +6,6 @@ import { AppContext, AppDispatchContext } from '@/context';
 const LOCAL_STORAGE_KEY = 'appState';
 
 const initialState = {
-  rates: {
-    try_irt: {
-      shop: 0,
-      buy: 0,
-      sell: 0,
-      fee: 300,
-    },
-  },
   customer: {
     firstName: 'خانم ',
     lastName: '',
@@ -21,13 +13,15 @@ const initialState = {
     address: '',
   },
   pricing: {
+    rate: 0,
+    fee: 300,
     subtotal: '',
     invoiceTotal: '',
     description: '',
     discountVal: '',
     discount: false,
     firstOrder: false,
-    date: null,
+    rateTime: null,
   },
   shipping: {
     rate: '450',
@@ -92,9 +86,6 @@ export default function AppProvider({ children }) {
 
 function appReducer(data, action) {
   switch (action.type) {
-    case 'set_rates': {
-      return { ...data, rates: action.data };
-    }
     case 'set_pricing': {
       return { ...data, pricing: action.data, customer: action.customer };
     }

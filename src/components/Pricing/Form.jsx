@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import * as yup from 'yup';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
@@ -35,22 +35,26 @@ const schema = yup
   })
   .required();
 
-export default function PricingForm({ updateRate }) {
+export default function PricingForm({ rates, updateRate }) {
   const { dispatch, resetApp } = useContext(AppDispatchContext);
-  const { customer, pricing, rates } = useContext(AppContext);
+  const { customer, pricing } = useContext(AppContext);
   const [editMode, setEditMode] = useState(true);
   const { control, handleSubmit, setValue, watch } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
       customer,
-      ...{
-        fee: rates?.fee,
-        rate: rates?.sell,
-      },
       ...pricing,
     },
   });
   const { discount, firstOrder } = watch();
+
+  useEffect(() => {
+    if (rates) {
+      setValue('fee', rates?.try_irt?.fee);
+      setValue('rate', rates?.try_irt?.sell);
+      setValue('rateTime', rates?.updated_at);
+    }
+  }, [rates]);
 
   const onSubmit = ({ customer, ...form }) => {
     const subtotal = parseFloat(form.subtotal);
@@ -92,8 +96,11 @@ export default function PricingForm({ updateRate }) {
       <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
         <PricingIcon />
       </Avatar>
-      <Typography component="h1" variant="h5">
-        محاسبه گر قیمت نهایی کالا
+      <Typography variant="h5">محاسبه گر قیمت نهایی کالا</Typography>
+      <Typography variant="body1">
+        {moment(rates?.updated_at || new Date().getTime()).format(
+          'jYYYY/jMM/jDD - HH:mm'
+        )}
       </Typography>
       <Box
         component="form"
