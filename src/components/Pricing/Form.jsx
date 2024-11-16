@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import * as yup from 'yup';
-import { Link } from 'next/link';
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Box from '@mui/material/Box';
@@ -12,7 +12,7 @@ import IconButton from '@mui/material/IconButton';
 import MoneyIcon from '@mui/icons-material/Money';
 import CloseIcon from '@mui/icons-material/Close';
 import PricingIcon from '@mui/icons-material/CurrencyLira';
-import { AppContext, AppDispatchContext } from '../../context';
+import { AppContext, AppDispatchContext } from '@/context';
 import CustomerFields from '../Form/CustomerFields';
 import NumericFormat from '../Form/NumericFormat';
 import Checkbox from '../Form/Checkbox';
@@ -204,7 +204,7 @@ export default function PricingForm() {
           LinkComponent={Link}
           variant="outlined"
           size="large"
-          to="/shipping"
+          href="/shipping"
         >
           محاسبه گر هزینه باربری
         </Button>
@@ -213,7 +213,7 @@ export default function PricingForm() {
           LinkComponent={Link}
           variant="outlined"
           size="large"
-          to="/waybill"
+          href="/waybill"
           sx={{ my: 2 }}
         >
           صدور بارنامه

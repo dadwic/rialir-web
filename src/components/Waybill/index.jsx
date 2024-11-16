@@ -9,9 +9,8 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
-import { persianNumber } from '../../utils';
-import { AppContext } from '../../context';
-import { getQRCode } from '../../utils';
+import { persianNumber, getQRCode } from '@/utils';
+import { AppContext } from '@/context';
 
 moment.loadPersian({ usePersianDigits: true, dialect: 'persian-modern' });
 

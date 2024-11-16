@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link } from 'react-router-dom';
+import { Link } from 'next/link';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
@@ -99,7 +99,7 @@ export default function WaybillForm() {
           LinkComponent={Link}
           variant="outlined"
           size="large"
-          to="/shipping"
+          href="/shipping"
         >
           محاسبه گر هزینه باربری
         </Button>

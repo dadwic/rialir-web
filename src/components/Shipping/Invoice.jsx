@@ -11,8 +11,8 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { ccyFormat, numFormat, persianNumber } from '../../utils';
-import { AppContext } from '../../context';
+import { ccyFormat, numFormat, persianNumber } from '@/utils';
+import { AppContext } from '@/context';
 import Logo from '../Logo';
 import URL from '../URL';
 

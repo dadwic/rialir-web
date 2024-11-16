@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import * as yup from 'yup';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Box from '@mui/material/Box';
@@ -236,7 +236,7 @@ export default function ShippingForm() {
           LinkComponent={Link}
           variant="outlined"
           size="large"
-          to="/"
+          href="/"
         >
           محاسبه گر قیمت نهایی کالا
         </Button>
