@@ -49,6 +49,7 @@ const initialState = {
 
 // Helper function to load state from local storage
 function loadState() {
+  if (typeof window === 'undefined') return undefined;
   try {
     const serializedState = localStorage.getItem(LOCAL_STORAGE_KEY);
     return serializedState ? JSON.parse(serializedState) : undefined;
@@ -63,16 +64,20 @@ export default function AppProvider({ children }) {
 
   // Sync state to local storage whenever it changes
   useEffect(() => {
-    try {
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(store));
-    } catch (error) {
-      console.warn('Could not save state to local storage:', error);
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(store));
+      } catch (error) {
+        console.warn('Could not save state to local storage:', error);
+      }
     }
   }, [store]);
 
   // Function to reset local storage and context state
   const resetApp = () => {
-    localStorage.removeItem(LOCAL_STORAGE_KEY); // Clear local storage
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(LOCAL_STORAGE_KEY); // Clear local storage
+    }
     dispatch({ type: 'reset' }); // Reset state to initial values
   };
 

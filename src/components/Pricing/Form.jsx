@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MoneyIcon from '@mui/icons-material/Money';
 import CloseIcon from '@mui/icons-material/Close';
+import RefreshIcon from '@mui/icons-material/Refresh';
 import PricingIcon from '@mui/icons-material/CurrencyLira';
 import { AppContext, AppDispatchContext } from '@/context';
 import CustomerFields from '../Form/CustomerFields';
@@ -28,26 +29,33 @@ const schema = yup
       mobile: yup.string().required('شماره موبایل الزامی است.'),
       address: yup.string().required('آدرس الزامی است.'),
     }),
-    try: yup.string().required('قیمت لیر الزامی است.'),
+    rate: yup.string().required('قیمت لیر الزامی است.'),
     fee: yup.string().required('کارمزد الزامی است.'),
     subtotal: yup.string().required('قیمت محصولات الزامی است.'),
   })
   .required();
 
-export default function PricingForm() {
+export default function PricingForm({ updateRate }) {
   const { dispatch, resetApp } = useContext(AppDispatchContext);
-  const { customer, pricing } = useContext(AppContext);
+  const { customer, pricing, rates } = useContext(AppContext);
   const [editMode, setEditMode] = useState(true);
   const { control, handleSubmit, setValue, watch } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: { customer, ...pricing },
+    defaultValues: {
+      customer,
+      ...{
+        fee: rates?.fee,
+        rate: rates?.sell,
+      },
+      ...pricing,
+    },
   });
   const { discount, firstOrder } = watch();
 
   const onSubmit = ({ customer, ...form }) => {
     const subtotal = parseFloat(form.subtotal);
     const fee = parseInt(form.fee);
-    const lir = parseInt(form.try);
+    const lir = parseInt(form.rate);
     // Convert toman to rial
     let rate = lir + fee;
     let total = subtotal * rate;
@@ -99,9 +107,20 @@ export default function PricingForm() {
             <Input
               control={control}
               type="tel"
-              id="try"
-              name="try"
+              id="rate"
+              name="rate"
               label="قیمت لیر (تومان)"
+              InputProps={{
+                endAdornment: (
+                  <IconButton
+                    edge="end"
+                    title="به‌روزرسانی قیمت لیر"
+                    onClick={updateRate}
+                  >
+                    <RefreshIcon />
+                  </IconButton>
+                ),
+              }}
             />
           </Grid>
           <Grid item xs={6}>

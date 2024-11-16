@@ -1,7 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import useSWR from 'swr';
+import { AppDispatchContext } from '@/context';
 import PricingForm from '@/components/Pricing/Form';
 import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
@@ -13,6 +14,7 @@ const fetcher = (url) =>
   }).then((r) => r.json());
 
 export default function Rates() {
+  const { dispatch } = useContext(AppDispatchContext);
   const { data, error, isLoading, mutate } = useSWR('/api/rates', fetcher);
 
   if (error) {
@@ -33,5 +35,12 @@ export default function Rates() {
   if (isLoading) {
     return <CircularProgress />;
   }
-  return <PricingForm />;
+
+  useEffect(() => {
+    if (data?.try_irt) {
+      dispatch({ type: 'set_rates', data });
+    }
+  }, [data]);
+
+  return <PricingForm updateRate={mutate} />;
 }
