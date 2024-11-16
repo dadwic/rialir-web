@@ -69,7 +69,7 @@ export default function PricingInvoice({ onEdit }) {
                 }}
               >
                 <Typography variant="subtitle2">
-                  {numFormat(pricing.try)} تومان
+                  {numFormat(pricing.rate)} تومان
                 </Typography>
               </TableCell>
               <TableCell

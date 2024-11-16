@@ -4,6 +4,7 @@ import React from 'react';
 import useSWR from 'swr';
 import PricingForm from '@/components/Pricing/Form';
 import CircularProgress from '@mui/material/CircularProgress';
+import Stack from '@mui/material/Stack';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 
@@ -25,13 +26,17 @@ export default function Pricing() {
           </Button>
         }
       >
-        خطا در بروزرسانی‌ قیمت لیر
+        خطا در به‌روزرسانی قیمت لیر
       </Alert>
     );
   }
 
   if (isLoading) {
-    return <CircularProgress />;
+    return (
+      <Stack minHeight="100vh" alignItems="center" justifyContent="center">
+        <CircularProgress />
+      </Stack>
+    );
   }
 
   return <PricingForm rates={data} updateRate={mutate} />;
