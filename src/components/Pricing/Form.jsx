@@ -98,10 +98,9 @@ export default function PricingForm({ rates, updateRate }) {
         <PricingIcon />
       </Avatar>
       <Typography variant="h5">محاسبه گر قیمت نهایی کالا</Typography>
-      <Typography variant="body1">
-        {moment(rates?.updated_at || new Date().getTime()).format(
-          'jYYYY/jMM/jDD - HH:mm'
-        )}
+      <Typography variant="subtitle1" color="textSecondary">
+        به‌روزرسانی قیمت لیر:&nbsp;
+        {moment(rates?.updated_at).format('jD jMMMM jYYYY [ساعت] H:mm')}
       </Typography>
       <Box
         component="form"
