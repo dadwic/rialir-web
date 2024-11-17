@@ -4,7 +4,7 @@ import { Vazirmatn } from 'next/font/google';
 import { createTheme } from '@mui/material/styles';
 
 const vazirmatn = Vazirmatn({
-  weight: ['400', '700'],
+  weight: ['500', '700'],
   subsets: ['arabic'],
   variable: '--font-vazirmatn',
   display: 'swap',
