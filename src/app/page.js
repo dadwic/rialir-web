@@ -7,6 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Stack from '@mui/material/Stack';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 const fetcher = (url) =>
   fetch(url, {
@@ -35,6 +36,9 @@ export default function Pricing() {
     return (
       <Stack minHeight="100vh" alignItems="center" justifyContent="center">
         <CircularProgress />
+        <Typography color="primary" mt={2}>
+          به‌روزرسانی قیمت لیر
+        </Typography>
       </Stack>
     );
   }
