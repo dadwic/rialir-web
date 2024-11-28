@@ -11,7 +11,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { numFormat, persianNumber, tryFormat } from '../../utils';
+import { ccyFormat, numFormat, persianNumber, tryFormat } from '../../utils';
 import { AppContext } from '../../context';
 import Logo from '../Logo';
 import URL from '../URL';
@@ -98,7 +98,7 @@ export default function PricingInvoice({ onEdit }) {
                   variant="subtitle2"
                   fontWeight={700}
                   onClick={() =>
-                    handleCopy(`${numFormat(pricing.invoiceTotal / 10)} تومان`)
+                    handleCopy(`${ccyFormat(pricing.invoiceTotal / 10)} تومان`)
                   }
                 >
                   {numFormat(pricing.invoiceTotal)} ریال
