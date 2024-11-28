@@ -1,7 +1,13 @@
 const packageJson = require('./package.json');
 
-module.exports = {
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  register: true,
+  skipWaiting: false,
+});
+
+module.exports = withPWA({
   env: {
     APP_VERSION: packageJson.version,
   },
-};
+});

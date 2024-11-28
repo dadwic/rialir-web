@@ -249,14 +249,6 @@ export default function PricingForm({ rates, updateRate }) {
         >
           صدور بارنامه
         </Button>
-        <Button
-          fullWidth
-          size="large"
-          variant="outlined"
-          href="https://www.rialir.com/lir/"
-        >
-          قیمت لحظه‌ای لیر
-        </Button>
       </Box>
       <Copyright />
     </Box>
