@@ -5,17 +5,13 @@ import Link from '@mui/material/Link';
 export default function Copyright(props) {
   return (
     <Typography
-      variant="body2"
+      variant="body1"
       color="text.secondary"
       align="center"
       my={5}
       {...props}
     >
-      کلیه حقوق این وب‌سایت محفوظ و متعلق به{' '}
-      <Link color="inherit" href="https://www.rialir.com/" target="_blank">
-        ریالیر
-      </Link>{' '}
-      می‌باشد.
+      v{process.env.APP_VERSION}
     </Typography>
   );
 }
