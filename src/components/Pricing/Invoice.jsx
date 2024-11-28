@@ -21,6 +21,15 @@ moment.loadPersian({ usePersianDigits: true, dialect: 'persian-modern' });
 export default function PricingInvoice({ onEdit }) {
   const { customer, pricing } = useContext(AppContext);
   const { firstOrder, discount, fee } = pricing;
+
+  const handleCopy = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch (err) {
+      console.error('Failed to copy text');
+    }
+  };
+
   return (
     <Box mt={2}>
       <Box
@@ -85,7 +94,13 @@ export default function PricingInvoice({ onEdit }) {
                 )}
               </TableCell>
               <TableCell align="center">
-                <Typography variant="subtitle2" fontWeight={700}>
+                <Typography
+                  variant="subtitle2"
+                  fontWeight={700}
+                  onClick={() =>
+                    handleCopy(`${numFormat(pricing.invoiceTotal / 10)} تومان`)
+                  }
+                >
                   {numFormat(pricing.invoiceTotal)} ریال
                 </Typography>
               </TableCell>
