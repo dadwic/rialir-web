@@ -66,10 +66,13 @@ export default function PricingForm({ rates, updateRate }) {
     let total = subtotal * rate;
     if (form.discount) total -= form.discountVal;
     if (firstOrder) {
-      rate = lir + 50;
+      rate = lir + parseInt(process.env.MIN_FEE);
       // Max discount is 250K-IRT
-      if (subtotal > 1000) total -= 250000;
-      else total = subtotal * rate;
+      if (subtotal > parseInt(process.env.MIN_ORDER)) {
+        total -= parseInt(process.env.MAX_DISCOUNT);
+      } else {
+        total = subtotal * rate;
+      }
     }
     const data = { ...form, invoiceTotal: total * 10 };
     dispatch({ type: 'set_pricing', customer, data });
