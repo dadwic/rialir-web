@@ -97,6 +97,14 @@ export default function PricingInvoice({ onEdit }) {
                 <Typography
                   variant="subtitle2"
                   fontWeight={700}
+                  sx={{
+                    userSelect: 'none',
+                    cursor: 'pointer',
+                    '&:active': {
+                      backgroundColor: 'grey.200',
+                      transform: 'scale(1.2)',
+                    },
+                  }}
                   onClick={() =>
                     handleCopy(`${ccyFormat(pricing.invoiceTotal / 10)} تومان`)
                   }
