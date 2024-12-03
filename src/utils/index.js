@@ -14,11 +14,9 @@ export function persianNumber(value) {
 }
 
 export function tryFormat(num) {
-  return persianNumber(
-    parseFloat(num)
-      .toFixed(2)
-      .replace(/\d(?=(\d{3})+$)/g, '$&,')
-  );
+  return parseFloat(num)
+    .toFixed(2)
+    .replace(/\d(?=(\d{3})+$)/g, '$&,');
 }
 
 export function ccyFormat(num) {

@@ -211,7 +211,7 @@ export default function PricingForm({ rates, updateRate }) {
               color="primary"
               control={control}
               defaultChecked={firstOrder}
-              label="سفارش اول بدون کارمزد (تا سقف ۱۰۰۰ لیر)"
+              label="سفارش اول (تخفیف تا ۱۰۰ هزار تومان)"
             />
           </Grid>
           <Grid item xs={9}>
