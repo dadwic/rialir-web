@@ -85,13 +85,12 @@ export default function PricingInvoice({ onEdit }) {
                 align="center"
                 sx={{ borderRight: '1px solid #e0e0e0' }}
               >
-                {firstOrder ? (
-                  <Typography variant="subtitle2">بدون کارمزد</Typography>
-                ) : (
-                  <Typography variant="subtitle2">
-                    {persianNumber(fee)} تومان
-                  </Typography>
-                )}
+                <Typography variant="subtitle2">
+                  {persianNumber(
+                    firstOrder ? process.env.NEXT_PUBLIC_MIN_FEE : fee
+                  )}
+                  &nbsp;تومان
+                </Typography>
               </TableCell>
               <TableCell align="center">
                 <Typography
