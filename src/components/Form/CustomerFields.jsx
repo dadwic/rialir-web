@@ -4,6 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import ManIcon from '@mui/icons-material/Man';
 import MenuItem from '@mui/material/MenuItem';
 import provinces from '@/utils/provinces';
+import TextMaskCustom from './TextMaskCustom';
 import Input from './Input';
 
 export default function CustomerFields({ control, setValue }) {
@@ -43,6 +44,9 @@ export default function CustomerFields({ control, setValue }) {
           name="customer.mobile"
           inputProps={{ maxLength: 11 }}
           label="شماره موبایل"
+          InputProps={{
+            inputComponent: TextMaskCustom,
+          }}
         />
       </Grid>
       <Grid item xs={6}>
