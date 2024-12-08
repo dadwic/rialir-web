@@ -43,6 +43,7 @@ export default function CustomerFields({ control, setValue }) {
           id="mobile"
           name="customer.mobile"
           label="شماره موبایل"
+          sx={{ direction: 'rtl', textAlign: 'right' }}
         />
       </Grid>
       <Grid item xs={6}>
