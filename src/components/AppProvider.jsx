@@ -10,7 +10,7 @@ const initialState = {
     firstName: 'خانم ',
     lastName: '',
     mobile: '',
-    address: '',
+    address: 'تهران',
   },
   pricing: {
     rate: '0',

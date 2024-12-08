@@ -2,6 +2,8 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import ManIcon from '@mui/icons-material/Man';
+import MenuItem from '@mui/material/MenuItem';
+import provinces from '@/utils/provinces';
 import Input from './Input';
 
 export default function CustomerFields({ control, setValue }) {
@@ -45,11 +47,18 @@ export default function CustomerFields({ control, setValue }) {
       </Grid>
       <Grid item xs={6}>
         <Input
+          select
           control={control}
           name="customer.address"
           id="address"
-          label="آدرس"
-        />
+          label="استان"
+        >
+          {provinces.map((name, key) => (
+            <MenuItem value={name} key={key}>
+              {name}
+            </MenuItem>
+          ))}
+        </Input>
       </Grid>
     </>
   );
