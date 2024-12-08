@@ -157,7 +157,9 @@ export default function PricingInvoice({ onEdit }) {
           <Typography gutterBottom>
             {customer.firstName} {customer.lastName}
           </Typography>
-          <Typography gutterBottom>{persianNumber(customer.mobile)}</Typography>
+          <Typography align="right" sx={{ direction: 'rtl' }} gutterBottom>
+            {customer.mobile}
+          </Typography>
           <Typography>{persianNumber(customer.address)}</Typography>
         </Grid>
         <Divider flexItem orientation="vertical">

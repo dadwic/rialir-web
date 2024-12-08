@@ -42,11 +42,7 @@ export default function CustomerFields({ control, setValue }) {
           type="tel"
           id="mobile"
           name="customer.mobile"
-          inputProps={{ maxLength: 11 }}
           label="شماره موبایل"
-          InputProps={{
-            inputComponent: TextMaskCustom,
-          }}
         />
       </Grid>
       <Grid item xs={6}>
