@@ -164,9 +164,9 @@ export default function PricingForm({ rates, updateRate }) {
               label="قیمت محصولات (₺)"
               InputProps={{
                 inputComponent: NumericFormat,
-                endAdornment: (
+                startAdornment: (
                   <IconButton
-                    edge="end"
+                    edge="start"
                     title="پاک کردن"
                     onClick={() => setValue('subtotal', '')}
                   >
