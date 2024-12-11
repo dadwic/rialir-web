@@ -244,8 +244,17 @@ export default function PricingForm({ rates, updateRate }) {
           LinkComponent={Link}
           variant="outlined"
           size="large"
-          href="/waybill"
+          href="/lottery"
           sx={{ my: 2 }}
+        >
+          قرعه‌کشی اینستاگرام
+        </Button>
+        <Button
+          fullWidth
+          LinkComponent={Link}
+          variant="outlined"
+          size="large"
+          href="/waybill"
         >
           صدور بارنامه
         </Button>
