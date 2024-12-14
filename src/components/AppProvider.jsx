@@ -25,8 +25,8 @@ const initialState = {
   },
   shipping: {
     rate: '450',
-    unitRate: '350',
-    cosmeticRate: '450',
+    unitRate: '400',
+    cosmeticRate: '500',
     courier: '30000',
     subtotal: '',
     invoiceTotal: '',
